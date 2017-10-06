@@ -1,3 +1,15 @@
+LOG_DRIVER = attribute(
+  'log_driver',
+  description: 'define preferable way to store logs. cis-docker-benchmark-2.12',
+  default: 'syslog'
+)
+
+LOG_OPTS = attribute(
+  'log_opts',
+  description: 'define Docker daemon log-opts. cis-docker-benchmark-2.12',
+  default: /syslog-address/
+)
+
 control "M-2.12" do
   title "2.12 Ensure centralized and remote logging is configured (Scored)"
   desc  "

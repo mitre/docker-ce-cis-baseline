@@ -1,3 +1,9 @@
+SWARM_MODE = attribute(
+  'swarm_mode',
+  description: 'define the swarm mode, `active` or `inactive`',
+  default: 'inactive'
+)
+
 control "M-7.1" do
   title "7.1 Ensure swarm mode is not Enabled, if not needed (Scored)"
   desc  "

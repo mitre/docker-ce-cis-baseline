@@ -1,3 +1,22 @@
+# attributes
+DAEMON_TLSCACERT = attribute(
+  'daemon_tlscacert',
+  description: 'Trust certs signed only by this CA',
+  default: '/etc/docker/ssl/ca.pem'
+)
+
+DAEMON_TLSCERT = attribute(
+  'daemon_tlscert',
+  description: 'Path to TLS certificate file',
+  default: '/etc/docker/ssl/server_cert.pem'
+)
+
+DAEMON_TLSKEY = attribute(
+  'daemon_tlskey',
+  description: 'Path to TLS key file',
+  default: '/etc/docker/ssl/server_key.pem'
+)
+
 control "M-2.6" do
   title "2.6 Ensure TLS authentication for Docker daemon is configured (Scored)"
   desc  "

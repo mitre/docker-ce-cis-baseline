@@ -1,3 +1,10 @@
+# attributes
+CONTAINER_USER = attribute(
+  'container_user',
+  description: 'define user within containers. cis-docker-benchmark-4.1',
+  default: 'ubuntu'
+)
+
 control "M-4.1" do
   title "4.1 Ensure a user for the container has been created (Scored)"
   desc  "

@@ -1,3 +1,9 @@
+AUTHORIZATION_PLUGIN = attribute(
+  'authorization_plugin',
+  description: 'define authorization plugin to manage access to Docker daemon. cis-docker-benchmark-2.11',
+  default: 'authz-broker'
+)
+
 control "M-2.11" do
   title "2.11 Ensure that authorization for Docker client commands is
 enabled(Scored)"

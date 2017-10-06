@@ -1,3 +1,9 @@
+MANAGEABLE_CONTAINER_NUMBER = attribute(
+  'managable_container_number',
+  description: 'keep number of containers on a host to a manageable total. cis-docker-benchmark-6.5',
+  default: 25
+)
+
 control "M-6.2" do
   title "6.2 Ensure container sprawl is avoided (Not Scored)"
   desc  "

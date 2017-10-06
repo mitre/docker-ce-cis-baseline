@@ -1,3 +1,9 @@
+TRUSTED_USER = attribute(
+  'trusted_user',
+  description: 'define trusted user to control Docker daemon. cis-docker-benchmark-1.6',
+  default: 'vagrant'
+)
+
 control "M-1.4" do
   title "1.4 Ensure only trusted users are allowed to control Docker
 daemon(Scored)"

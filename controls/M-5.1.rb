@@ -1,3 +1,9 @@
+APP_ARMOR_PROFILE = attribute(
+  'app_armor_profile',
+  description: 'define apparmor profile for Docker containers. cis-docker-benchmark-5.1',
+  default: 'docker-default'
+)
+
 control "M-5.1" do
   title "5.1 Ensure AppArmor Profile is Enabled (Scored)"
   desc  "

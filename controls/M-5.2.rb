@@ -1,3 +1,9 @@
+SELINUX_PROFILE = attribute(
+  'selinux_profile',
+  description: 'define SELinux profile for Docker containers. cis-docker-benchmark-5.2',
+  default:  /label\:level\:s0-s0\:c1023/
+)
+
 control "M-5.2" do
   title "5.2 Ensure SELinux security options are set, if applicable (Scored)"
   desc  "

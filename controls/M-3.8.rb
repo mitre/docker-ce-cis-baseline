@@ -1,3 +1,9 @@
+REGISTRY_CA_FILE = attribute(
+  'registry_ca_file',
+  description: 'certificate file for a certain Docker registry certificate files. cis-docker-benchmark-3.7 and cis-docker-benchmark-3.8',
+  default: '/etc/docker/certs.d/registry_hostname:port/ca.crt'
+)
+
 control "M-3.8" do
   title "3.8 Ensure that registry certificate file permissions are set to 444
 or\nmore restrictive (Scored)"

@@ -1,3 +1,15 @@
+SWARM_MODE = attribute(
+  'swarm_mode',
+  description: 'define the swarm mode, `active` or `inactive`',
+  default: 'inactive'
+)
+
+SWARM_PORT = attribute(
+  'swarm_port',
+  description: 'port of the swarm node',
+  default: 2377
+)
+
 control "M-7.3" do
   title "7.3 Ensure swarm services are binded to a specific host
 interface(Scored)"

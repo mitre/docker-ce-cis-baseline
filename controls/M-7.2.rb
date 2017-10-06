@@ -1,3 +1,15 @@
+SWARM_MODE = attribute(
+  'swarm_mode',
+  description: 'define the swarm mode, `active` or `inactive`',
+  default: 'inactive'
+)
+
+SWARM_MAX_MANAGER_NODES = attribute(
+  'swarm_max_manager_nodes',
+  description: 'number of manager nodes in a swarm',
+  default: 3
+)
+
 control "M-7.2" do
   title "7.2 Ensure the minimum number of manager nodes have been created\nin a
 swarm (Scored)"

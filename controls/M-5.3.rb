@@ -1,3 +1,9 @@
+# attributes
+CONTAINER_CAPADD = attribute(
+  'container_capadd',
+  description: 'define needed capabilities for containers.'
+)
+
 control "M-5.3" do
   title "5.3 Ensure Linux Kernel Capabilities are restricted within
 containers(Scored)"

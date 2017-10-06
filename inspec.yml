@@ -1,0 +1,8 @@
+name: cis-docker-ce-profile
+title: CIS Docker Community Edition
+maintainer: MITRE InSpec Team
+copyright: 
+copyright_email: inspec_support@mitre.org
+license: Apache-2.0
+summary: The CIS Docker Community Edition Benchmark v1.1.0 InSpec profile.
+version: 1.1.0

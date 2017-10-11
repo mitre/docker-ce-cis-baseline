@@ -37,7 +37,7 @@ present, the ownership and group-ownership for this file\nis correctly set to
 root.\n"
   ref 'systemd', url: 'https://docs.docker.com/engine/admin/systemd/'
 
-  describe file(docker_helper.path) do
+  describe file(docker.path) do
     it { should exist }
     it { should be_file }
     it { should be_owned_by 'root' }

@@ -37,8 +37,8 @@ not audited. The file docker.service\nmay not be available on the system.\n"
   ref 'System auditing', url: 'https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security_Guide/chap-system_auditing.html'
 
   only_if { os.linux? }
-  if docker_helper.path
-    rule = '-w ' + docker_helper.path + ' -p rwxa -k docker'
+  if docker.path
+    rule = '-w ' + docker.path + ' -p rwxa -k docker'
     describe auditd_rules do
       its(:lines) { should include(rule) }
     end

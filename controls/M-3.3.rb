@@ -37,7 +37,7 @@ root.\n"
   ref 'daemonsocket-option', url: 'https://docs.docker.com/engine/reference/commandline/dockerd/#daemonsocket-option'
   ref 'docker.socket', url: 'https://github.com/docker/dockerce/blob/master/components/packaging/deb/systemd/docker.socket'
 
-  describe file(docker_helper.socket) do
+  describe file(docker.socket) do
     it { should exist }
     it { should be_file }
     it { should be_owned_by 'root' }

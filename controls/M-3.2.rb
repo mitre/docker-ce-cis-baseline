@@ -33,7 +33,7 @@ case, this recommendation is not\napplicable. By default, if the file is
 present, the file permissions are correctly set to 644.\n"
   ref 'systemd', url: 'https://docs.docker.com/articles/systemd/'
 
-  describe file(docker_helper.path) do
+  describe file(docker.path) do
     it { should exist }
     it { should be_file }
     it { should be_readable.by('owner') }

@@ -35,7 +35,7 @@ present, the file permissions for this file are correctly set\nto 644.\n"
   ref 'docker.socker', url: 'https://github.com/YungSang/fedora-atomic-packer/blob/master/oem/docker.socket'
   ref 'centos-7rhel-7-and-docker-containers-on-boot', url: 'https://daviddaeschler.com/2014/12/14/centos-7rhel-7-and-docker-containers-on-boot/'
 
-  describe file(docker_helper.socket) do
+  describe file(docker.socket) do
     it { should exist }
     it { should be_file }
     it { should be_readable.by('owner') }

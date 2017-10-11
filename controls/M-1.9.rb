@@ -33,8 +33,8 @@ not audited. The file docker.socket may\nnot be available on the system.\n"
   ref 'System auditing', url: 'https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security_Guide/chap-system_auditing.html'
 
   only_if { os.linux? }
-  if docker_helper.socket
-    rule = '-w ' + docker_helper.socket + ' -p rwxa -k docker'
+  if docker.socket
+    rule = '-w ' + docker.socket + ' -p rwxa -k docker'
     describe auditd_rules do
       its(:lines) { should include(rule) }
     end

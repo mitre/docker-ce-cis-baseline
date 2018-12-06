@@ -1,4 +1,4 @@
-# cis-docker-community-edition-profile
+# cis-docker-community-edition-baseline
 
 CIS Docker Community Edition Benchmark InSpec Profile
 

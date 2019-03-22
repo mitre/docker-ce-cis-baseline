@@ -1,6 +1,6 @@
 | Check          | Sub-check                                                                         | Who | Completion Date *** | Issue #'s |
 |----------------|-----------------------------------------------------------------------------------|-----|-----------------|-----------|
-|Logical checks| Proper profile directory structure	[1]						|||
+|Logical checks| Proper profile directory structure	[1]						|Alicia Sturtevant||
 ||JSON output review (e.g., pass/fail on ,<br>hardened, not hardened, edge cases, etc.)|||
 ||InSpec syntax checker|||
 ||Local commands focused on target not the runner [2]|||

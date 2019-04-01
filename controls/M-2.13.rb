@@ -1,16 +1,10 @@
 control "M-2.13" do
   title "2.13 Ensure operations on legacy registry (v1) are Disabled (Scored)"
-  desc  "
-    The latest Docker registry is v2. All operations on the legacy registry
-version (v1) should be
-    restricted.
-    Docker registry v2 brings in many performance and security improvements
-over v1. It
-    supports container image provenance and other security features such as
-image signing
-    and verification. Hence, operations on Docker legacy registry should be
-restricted.
-
+  desc  "The latest Docker registry is v2. All operations on the legacy registry
+  version (v1) should be restricted.
+  Docker registry v2 brings in many performance and security improvements
+  over v1. It supports container image provenance and other security features such as
+  image signing and verification. Hence, operations on Docker legacy registry should be restricted.
   "
   impact 0.5
   tag "severity": "medium"
@@ -18,11 +12,11 @@ restricted.
   tag "cis_control": ["18", "6.1"]
   tag "cis_level": "Level 1 - Docker"
   tag "nist": ["SI-1", "4"]
-  tag "check_text": "ps -ef | grep dockerd\nThe above command should list
---disable-legacy-registry as an option passed to the\ndocker daemon.\n"
+  tag "check_text": "ps -ef | grep dockerd The above command should list
+  --disable-legacy-registry as an option passed to the docker daemon."
   tag "fix": "Start the docker daemon as below:\ndockerd
---disable-legacy-registry\n"
-  tag "Default Value": "By default, legacy registry operations are allowed.\n"
+  --disable-legacy-registry"
+  tag "Default Value": "By default, legacy registry operations are allowed."
   ref 'legacyregistries', url: 'https://docs.docker.com/edge/engine/reference/commandline/dockerd/#legacyregistries'
   ref 'Docker daemon storage driver options', url: 'https://docs.docker.com/engine/reference/commandline/daemon/#storage-driver-options'
   ref 'Proposal: Provenance step 1 - Transform images for validation and verification', url: 'https://github.com/docker/docker/issues/8093'

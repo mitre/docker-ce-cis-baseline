@@ -1,25 +1,15 @@
 control "M-2.8" do
   title "2.8 Enable user namespace support (Scored)"
-  desc  "
-    Enable user namespace support in Docker daemon to utilize container user to
-host user remapping. This recommendation is beneficial where containers you are
-using do not have an
-    explicit container user defined in the container image. If container images
-that you are
-    using have a pre-defined non-root user, this recommendation may be skipped
-since this
-    feature is still in its infancy and might give you unpredictable issues and
-complexities.
-    The Linux kernel user namespace support in Docker daemon provides
-additional security
-    for the Docker host system. It allows a container to have a unique range of
-user and group
-    IDs which are outside the traditional user and group range utilized by the
-host system.
-    For example, the root user will have expected administrative privilege
-inside the container
-    but can effectively be mapped to an unprivileged UID on the host system.
-
+  desc  "Enable user namespace support in Docker daemon to utilize container user to
+ host user remapping. This recommendation is beneficial where the containers you are
+ using do not have an explicit container user defined in the container image. If container images
+ that you are using have a pre-defined non-root user, this recommendation may be skipped
+ since this feature is still in its infancy and might give you unpredictable issues and complexities.
+ The Linux kernel user namespace support in Docker daemon provides additional security
+ for the Docker host system. It allows a container to have a unique range of
+ user and group IDs which are outside the traditional user and group range utilized by the
+ host system. For example, the root user will have expected administrative privilege
+ inside the container but can effectively be mapped to an unprivileged UID on the host system.
   "
   impact 0.5
   tag "severity": "medium"
@@ -28,21 +18,20 @@ inside the container
   tag "cis_level": "Level 2 - Docker"
   tag "nist": ["SI-1", "4"]
   tag "check_text": "ps -p $(docker inspect --format='{{ .State.Pid }}' <CONTAINER
-ID>) -o\npid,user\nThe above command would find the PID of the container and
-then would list the host user\nassociated with the container process. If the
-container process is running as root, then this\nrecommendation is
-non-compliant.\nAlternatively, you can run docker info to ensure that the
-userns is listed under Security\nOptions:\ndocker info --format '{{
-.SecurityOptions }}'\n"
+  ID>) -o pid,user The above command would find the PID of the container and
+  then would list the host user associated with the container process. If the
+  container process is running as root, then this recommendation is non-compliant.
+  Alternatively, you can run docker info to ensure that the
+  user is listed under Security Options: docker info --format '{{ .SecurityOptions }}'"
   tag "fix": "Please consult Docker documentation for various ways in which
-this can be configured\ndepending upon your requirements. Your steps might also
-vary based on platform - For\nexample, on Red Hat, sub-UIDs and sub-GIDs
-mapping creation does not work\nautomatically. You might have to create your
-own mapping.\nHowever, the high-level steps are as below:\nStep 1: Ensure that
-the files /etc/subuid and /etc/subgid exist.\ntouch /etc/subuid
-/etc/subgid\nStep 2: Start the docker daemon with --userns-remap flag\ndockerd
---userns-remap=default\n"
-  tag "Default Value": "By default, user namespace is not remapped.\n"
+  this can be configured depending upon your requirements. Your steps might also
+  vary based on platform - For example, on Red Hat, sub-UIDs and sub-GIDs
+  mapping creation does not work automatically. You might have to create your
+  own mapping. However, the high-level steps are as below: Step 1: Ensure that
+  the files /etc/subuid and /etc/subgid exist. touch /etc/subuid
+  /etc/subgid Step 2: Start the docker daemon with --userns-remap flag dockerd
+  --userns-remap=default"
+  tag "Default Value": "By default, user namespace is not remapped."
   ref 'User namespeces', url: 'http://man7.org/linux/man-pages/man7/user_namespaces.7.html'
   ref 'daemon-usernamespace-options', url: 'https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-usernamespace-options'
   ref 'Docker daemon configuration', url: 'https://docs.docker.com/engine/reference/commandline/daemon/'

@@ -1,6 +1,6 @@
-# cis-docker-community-edition-baseline
+# docker-ce-cis-baseline
 
-CIS Docker Community Edition Benchmark InSpec Profile
+Docker Community Edition CIS Baseline InSpec Profile
 
 ## Versioning and State of Development
 This project uses the [Semantic Versioning Policy](https://semver.org/). 

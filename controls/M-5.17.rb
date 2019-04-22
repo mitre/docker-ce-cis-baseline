@@ -1,12 +1,12 @@
-control "M-5.17" do
-  title "5.17 Ensure host devices are not directly exposed to containers (Not Scored)"
+control 'M-5.17' do
+  title '5.17 Ensure host devices are not directly exposed to containers (Not Scored)'
   desc  "Host devices can be directly exposed to containers at runtime. Do not
   directly expose host devices to containers especially for containers that are not trusted.
   The --device option exposes the host devices to the containers and
   consequently, the containers can directly access such host devices. You would not require the
   container to run in privileged mode to access and manipulate the host devices. By
   default, the container will be able to read, write and mknod these devices.
-  Additionally, it is possible for containers to remove block devices from the host. 
+  Additionally, it is possible for containers to remove block devices from the host.
   Hence, do not expose host devices to the containers directly.
   If at all, you would want to expose the host device to a container, use the
   sharing permissions appropriately:
@@ -17,11 +17,11 @@ control "M-5.17" do
   impact 0.5
   tag "ref": "1.
   https://docs.docker.com/engine/reference/commandline/run/#options"
-  tag "severity": "medium"
-  tag "cis_id": "5.17"
-  tag "cis_control": ["14", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["AC-6", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '5.17'
+  tag "cis_control": ['14', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['AC-6', '4']
   tag "check_text": "docker ps --quiet --all | xargs docker inspect --format '{{ .Id
   }}:Devices={{ .HostConfig.Devices }}'The above command would list out each
   device with below information:CgroupPermissions - For example,
@@ -54,7 +54,7 @@ control "M-5.17" do
   if !docker.containers.running?.ids.empty?
     docker.containers.running?.ids.each do |id|
       describe docker.object(id) do
-        its(%w(HostConfig Devices)) { should be_empty }
+        its(%w{HostConfig Devices}) { should be_empty }
       end
     end
   end

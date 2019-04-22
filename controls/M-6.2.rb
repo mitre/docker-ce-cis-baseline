@@ -1,5 +1,5 @@
-control "M-6.2" do
-  title "6.2 Ensure container sprawl is avoided (Not Scored)"
+control 'M-6.2' do
+  title '6.2 Ensure container sprawl is avoided (Not Scored)'
   desc  "Do not keep a large number of containers on the same host.
   The flexibility of containers makes it easy to run multiple instances of
   applications and indirectly leads to Docker images that exist at varying security patch
@@ -13,11 +13,11 @@ control "M-6.2" do
   tag "ref": "1.
   https://zeltser.com/security-risks-and-benefits-of-docker-application/2.
   http://searchsdn.techtarget.com/feature/Docker-networking-How-Linuxcontainers-will-change-your-network"
-  tag "severity": "medium"
-  tag "cis_id": "6.2"
-  tag "cis_control": ["18", "6.1"]
-  tag "cis_level": "Level 1 - Linux Host OS"
-  tag "nist": ["SI-1", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '6.2'
+  tag "cis_control": ['18', '6.1']
+  tag "cis_level": 'Level 1 - Linux Host OS'
+  tag "nist": ['SI-1', '4']
   tag "check_text": "Step 1 - Find the total number of containers you have on the
   host: docker info --format '{{ .Containers }}' Step 2 - Execute the below
   commands to find the total number of containers that are actually running or

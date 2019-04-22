@@ -1,5 +1,5 @@
-control "M-5.21" do
-  title "5.21 Ensure the default seccomp profile is not Disabled (Scored)"
+control 'M-5.21' do
+  title '5.21 Ensure the default seccomp profile is not Disabled (Scored)'
   desc  "Seccomp filtering provides a means for a process to specify a filter for
   incoming system calls. The default Docker seccomp profile works on whitelist basis and
   allows 311 system calls and blocks all others. It should not be disabled unless it hinders your
@@ -17,11 +17,11 @@ control "M-5.21" do
   https://docs.docker.com/engine/security/seccomp/5.
   https://www.kernel.org/doc/Documentation/prctl/seccomp_filter.txt6.
   https://github.com/docker/docker/issues/22870"
-  tag "severity": "medium"
-  tag "cis_id": "5.21"
-  tag "cis_control": ["18", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["SI-1", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '5.21'
+  tag "cis_control": ['18', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['SI-1', '4']
   tag "check_text": "docker ps --quiet --all | xargs docker inspect --format '{{ .Id
   }}: SecurityOpt={{ .HostConfig.SecurityOpt }}' The above command should
   return <no value> or your modified seccomp profile. If it returns
@@ -48,8 +48,8 @@ control "M-5.21" do
   if !docker.containers.running?.ids.empty?
     docker.containers.running?.ids.each do |id|
       describe docker.object(id) do
-        its(%w(HostConfig SecurityOpt)) { should include(/seccomp/) }
-        its(%w(HostConfig SecurityOpt)) { should_not include(/seccomp[=|:]unconfined/) }
+        its(%w{HostConfig SecurityOpt}) { should include(/seccomp/) }
+        its(%w{HostConfig SecurityOpt}) { should_not include(/seccomp[=|:]unconfined/) }
       end
     end
   end

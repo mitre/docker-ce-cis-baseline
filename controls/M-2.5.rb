@@ -1,5 +1,5 @@
-control "M-2.5" do
-  title "2.5 Ensure aufs storage driver is not used (Scored)"
+control 'M-2.5' do
+  title '2.5 Ensure aufs storage driver is not used (Scored)'
   desc  "Do not use aufs as storage driver for your Docker instance.
   The aufs storage driver is the oldest storage driver. It is based on a
   Linux kernel patch-set that is unlikely to be merged into the main Linux kernel. aufs driver is
@@ -7,11 +7,11 @@ control "M-2.5" do
   importantly, aufs is not a supported driver in many Linux distributions using latest Linux kernels.
   "
   impact 0.5
-  tag "severity": "medium"
-  tag "cis_id": "2.5"
-  tag "cis_control": ["18", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["SI-1", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '2.5'
+  tag "cis_control": ['18', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['SI-1', '4']
   tag "check_text": "Execute the below command and verify that aufs is not used as
   storage driver: docker info | grep -e \"^Storage Driver:\\s*aufs\\s*$\" The
   above command should not return anything."

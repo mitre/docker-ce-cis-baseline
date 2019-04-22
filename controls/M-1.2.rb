@@ -1,5 +1,5 @@
-control "M-1.2" do
-  title "1.2 Ensure the container host has been Hardened (Not Scored)"
+control 'M-1.2' do
+  title '1.2 Ensure the container host has been Hardened (Not Scored)'
   desc  "
   Containers run on a Linux host. A container host can run one or more
   containers. It is of utmost importance to harden the host to mitigate host security misconfiguration.
@@ -8,11 +8,11 @@ control "M-1.2" do
   mitigated. Not hardening the host system could lead to security exposures and breaches.
   "
   impact 0.5
-  tag "severity": "medium"
-  tag "cis_id": "1.2"
-  tag "cis_control": ["3", "6.1"]
-  tag "cis_level": "Level 1 - Linux Host OS"
-  tag "nist": ["CM-6", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '1.2'
+  tag "cis_control": ['3', '6.1']
+  tag "cis_level": 'Level 1 - Linux Host OS'
+  tag "nist": ['CM-6', '4']
   tag "check_text": "Ensure that the host specific security guidelines are followed.
   Ask the system administrators which security benchmark the current host
   system complies with. Ensure that the host systems actually complies with that

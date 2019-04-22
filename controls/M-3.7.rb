@@ -1,5 +1,5 @@
-control "M-3.7" do
-  title "3.7 Ensure that registry certificate file ownership is set to root:root(Scored)"
+control 'M-3.7' do
+  title '3.7 Ensure that registry certificate file ownership is set to root:root(Scored)'
   desc  "Verify that all the registry certificate files (usually found under
   the /etc/docker/certs.d/<registry-name> directory) are owned and group-owned by root.
   The /etc/docker/certs.d/<registry-name> directory contains Docker registry certificates.
@@ -7,12 +7,12 @@ control "M-3.7" do
   the integrity of the certificates.
   "
   impact 0.5
-  tag "ref": "1. https://docs.docker.com/registry/insecure/"
-  tag "severity": "medium"
-  tag "cis_id": "3.7"
-  tag "cis_control": ["5.1", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["AC-6(9)", "4"]
+  tag "ref": '1. https://docs.docker.com/registry/insecure/'
+  tag "severity": 'medium'
+  tag "cis_id": '3.7'
+  tag "cis_control": ['5.1', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['AC-6(9)', '4']
   tag "check_text": "Execute the below command to verify that the registry
   certificate files are owned and group-owned by root: stat -c %U:%G
   /etc/docker/certs.d/* | grep -v root:root The above command should not return

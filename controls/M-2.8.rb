@@ -1,5 +1,5 @@
-control "M-2.8" do
-  title "2.8 Enable user namespace support (Scored)"
+control 'M-2.8' do
+  title '2.8 Enable user namespace support (Scored)'
   desc  "Enable user namespace support in Docker daemon to utilize container user to
  host user remapping. This recommendation is beneficial where the containers you are
  using do not have an explicit container user defined in the container image. If container images
@@ -12,11 +12,11 @@ control "M-2.8" do
  inside the container but can effectively be mapped to an unprivileged UID on the host system.
   "
   impact 0.5
-  tag "severity": "medium"
-  tag "cis_id": "2.8"
-  tag "cis_control": ["18", "6.1"]
-  tag "cis_level": "Level 2 - Docker"
-  tag "nist": ["SI-1", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '2.8'
+  tag "cis_control": ['18', '6.1']
+  tag "cis_level": 'Level 2 - Docker'
+  tag "nist": ['SI-1', '4']
   tag "check_text": "ps -p $(docker inspect --format='{{ .State.Pid }}' <CONTAINER
   ID>) -o pid,user The above command would find the PID of the container and
   then would list the host user associated with the container process. If the
@@ -31,7 +31,7 @@ control "M-2.8" do
   the files /etc/subuid and /etc/subgid exist. touch /etc/subuid
   /etc/subgid Step 2: Start the docker daemon with --userns-remap flag dockerd
   --userns-remap=default"
-  tag "Default Value": "By default, user namespace is not remapped."
+  tag "Default Value": 'By default, user namespace is not remapped.'
   ref 'User namespeces', url: 'http://man7.org/linux/man-pages/man7/user_namespaces.7.html'
   ref 'daemon-usernamespace-options', url: 'https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-usernamespace-options'
   ref 'Docker daemon configuration', url: 'https://docs.docker.com/engine/reference/commandline/daemon/'

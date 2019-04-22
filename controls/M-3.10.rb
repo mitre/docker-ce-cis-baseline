@@ -1,5 +1,5 @@
-control "M-3.10" do
-  title "3.10 Ensure that TLS CA certificate file permissions are set to 444 or more restrictive (Scored)"
+control 'M-3.10' do
+  title '3.10 Ensure that TLS CA certificate file permissions are set to 444 or more restrictive (Scored)'
   desc  "Verify that the TLS CA certificate file (the file that is passed along with the --tlscacert
   parameter) has permissions of 444 or more restrictive.
   The TLS CA certificate file should be protected from any tampering. It is
@@ -9,11 +9,11 @@ control "M-3.10" do
   impact 0.5
   tag "ref": "1. https://docs.docker.com/registry/insecure/2.
   https://docs.docker.com/engine/security/https/"
-  tag "severity": "medium"
-  tag "cis_id": "3.10"
-  tag "cis_control": ["14.4", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["AC-3 (3)", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '3.10'
+  tag "cis_control": ['14.4', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['AC-3 (3)', '4']
   tag "check_text": "Execute the below command to verify that the TLS CA certificate
   file has permissions of 444 or more restrictive: stat -c %a <path to TLS CA
   certificate file>"

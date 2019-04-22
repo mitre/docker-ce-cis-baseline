@@ -1,4 +1,4 @@
-control "M-1.8" do
+control 'M-1.8' do
   title "1.8 Ensure auditing is configured for Docker files and directories
   docker.service (Scored)"
   desc  "Audit docker.service, if applicable.
@@ -10,11 +10,11 @@ control "M-1.8" do
   audited, if applicable.
   "
   impact 0.5
-  tag "severity": "medium"
-  tag "cis_id": "1.8"
-  tag "cis_control": ["14.6", "6.1"]
-  tag "cis_level": "Level 1 - Linux Host OS"
-  tag "nist": ["AU-2", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '1.8'
+  tag "cis_control": ['14.6', '6.1']
+  tag "cis_level": 'Level 1 - Linux Host OS'
+  tag "nist": ['AU-2', '4']
   tag "check_text": "Step 1: Find out the file location: systemctl show -p
   FragmentPath docker.service Step 2: If the file does not exist, this
   recommendation is not applicable. If the file exists, verify that there is an
@@ -34,12 +34,12 @@ control "M-1.8" do
 
   docker_service_file = docker_service_file[equal_sign+1..-1]
 
-  if file("#{docker_service_file}").exist?
+  if file(docker_service_file.to_s).exist?
 
     describe auditd  do
       its('lines') { should include "-w #{docker_service_file} -k docker" }
     end
-  
+
   else
     impact 0.0
     describe 'The docker service file does not exist, therefore this control is N/A' do

@@ -1,7 +1,7 @@
-control "M-2.1" do
+control 'M-2.1' do
   title "2.1 Ensure network traffic is restricted between containers on
   the default bridge (Scored)"
-  desc  "
+  desc "
   By default, all network traffic is allowed between containers on the same
   host on the default network bridge. If not desired, restrict all the inter-container
   communication. Link specific containers together that require communication. Alternatively, you
@@ -13,11 +13,11 @@ control "M-2.1" do
   inter-container communication on the default network bridge.
   "
   impact 0.5
-  tag "severity": "medium"
-  tag "cis_id": "2.1"
-  tag "cis_control": ["6.2", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["AU-3", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '2.1'
+  tag "cis_control": ['6.2', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['AU-3', '4']
   tag "check_text": "Run the below command and verify that the default network
   bridge has been configured to restrict inter-container communication. docker
   network ls --quiet | xargs docker network inspect --format '{{ .Name\n}}: {{

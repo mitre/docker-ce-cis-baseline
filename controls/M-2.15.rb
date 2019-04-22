@@ -1,5 +1,5 @@
-control "M-2.15" do
-  title "2.15 Ensure Userland Proxy is Disabled (Scored)"
+control 'M-2.15' do
+  title '2.15 Ensure Userland Proxy is Disabled (Scored)'
   desc  "The docker daemon starts a userland proxy service for port forwarding
   whenever a port is exposed. Where hairpin NAT is available, this service is generally
   superfluous to requirements and can be disabled.
@@ -11,15 +11,15 @@ control "M-2.15" do
   startup to reduce the attack surface of the installation.
   "
   impact 0.5
-  tag "severity": "medium"
-  tag "cis_id": "2.15"
-  tag "cis_control": ["9.1", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["CM-7(1)", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '2.15'
+  tag "cis_control": ['9.1', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['CM-7(1)', '4']
   tag "check_text": "ps -ef | grep dockerd Ensure that the --userland-proxy
   parameter is set to false."
-  tag "fix": "Run the Docker daemon as below: dockerd --userland-proxy=false"
-  tag "Default Value": "By default, the userland proxy is enabled."
+  tag "fix": 'Run the Docker daemon as below: dockerd --userland-proxy=false'
+  tag "Default Value": 'By default, the userland proxy is enabled.'
   ref 'the-docker-proxy', url: 'http://windsock.io/the-docker-proxy/'
   ref 'issues 14856', url: 'https://github.com/docker/docker/issues/14856'
   ref 'issues 22741', url: 'https://github.com/docker/docker/issues/22741'

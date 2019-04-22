@@ -1,17 +1,17 @@
-control "M-3.20" do
-  title "3.20 Ensure that /etc/default/docker file permissions are set to 644 or more restrictive (Scored)"
+control 'M-3.20' do
+  title '3.20 Ensure that /etc/default/docker file permissions are set to 644 or more restrictive (Scored)'
   desc  "Verify that the /etc/default/docker file permissions are correctly set to
   644 or more restrictive. The /etc/default/docker file contains sensitive parameters that may alter the
   behavior of the docker daemon. Hence, it should be writable only by root to maintain the
   integrity of the file.
   "
   impact 0.5
-  tag "ref": "1. https://docs.docker.com/engine/admin/configuring/"
-  tag "severity": "medium"
-  tag "cis_id": "3.20"
-  tag "cis_control": ["14.4", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["AC-3 (3)", "4"]
+  tag "ref": '1. https://docs.docker.com/engine/admin/configuring/'
+  tag "severity": 'medium'
+  tag "cis_id": '3.20'
+  tag "cis_control": ['14.4', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['AC-3 (3)', '4']
   tag "check_text": "Execute the below command to verify that the file permissions
   are correctly set to 644 or more restrictive: stat -c %a
   /etc/default/docker"

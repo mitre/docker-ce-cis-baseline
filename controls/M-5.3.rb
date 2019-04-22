@@ -1,5 +1,5 @@
-control "M-5.3" do
-  title "5.3 Ensure Linux Kernel Capabilities are restricted within containers (Scored)"
+control 'M-5.3' do
+  title '5.3 Ensure Linux Kernel Capabilities are restricted within containers (Scored)'
   desc  "By default, Docker starts containers with a restricted set of Linux Kernel
   Capabilities. This means that any process may be granted the required capabilities instead of
   root access. When using Linux Kernel Capabilities, the processes do not have to run as root
@@ -19,11 +19,11 @@ control "M-5.3" do
   https://docs.docker.com/engine/security/security/#linux-kernel-capabilities2.
   http://man7.org/linux/man-pages/man7/capabilities.7.html3.
   http://www.oreilly.com/webops-perf/free/files/docker-security.pdf"
-  tag "severity": "medium"
-  tag "cis_id": "5.3"
-  tag "cis_control": ["5.1", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["AC-6(9)", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '5.3'
+  tag "cis_control": ['5.1', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['AC-6(9)', '4']
   tag "check_text": "docker ps --quiet --all | xargs docker inspect --format '{{ .Id
   }}: CapAdd={{.HostConfig.CapAdd }} CapDrop={{ .HostConfig.CapDrop }}' Verify
   that the added and dropped Linux Kernel Capabilities are in line with the
@@ -55,9 +55,9 @@ control "M-5.3" do
   if !docker.containers.running?.ids.empty?
     docker.containers.running?.ids.each do |id|
       describe docker.object(id) do
-        its(%w(HostConfig CapDrop)) { should include(/all/) }
-        its(%w(HostConfig CapDrop)) { should_not eq nil }
-        its(%w(HostConfig CapAdd)) { should eq attribute('container_capadd') }
+        its(%w{HostConfig CapDrop}) { should include(/all/) }
+        its(%w{HostConfig CapDrop}) { should_not eq nil }
+        its(%w{HostConfig CapAdd}) { should eq attribute('container_capadd') }
       end
     end
   end

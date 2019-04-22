@@ -1,5 +1,5 @@
-control "M-3.15" do
-  title "3.15 Ensure that Docker socket file ownership is set to root:docker(Scored)"
+control 'M-3.15' do
+  title '3.15 Ensure that Docker socket file ownership is set to root:docker(Scored)'
   desc  "Verify that the Docker socket file is owned by root and group-owned by
   docker. The docker daemon runs as root. The default Unix socket hence must be owned by
   root. If any other user or process owns this socket, then it might be possible for that
@@ -18,11 +18,11 @@ control "M-3.15" do
   tag "ref": "1.
   https://docs.docker.com/engine/reference/commandline/dockerd/#daemonsocket-option2.
   https://docs.docker.com/engine/reference/commandline/dockerd/#bind-dockerto-another-hostport-or-a-unix-socket"
-  tag "severity": "medium"
-  tag "cis_id": "3.15"
-  tag "cis_control": ["5.1", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["AC-6(9)", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '3.15'
+  tag "cis_control": ['5.1', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['AC-6(9)', '4']
   tag "check_text": "Execute the below command to verify that the Docker socket file
   is owned by root and group-owned by docker: stat -c %U:%G
   /var/run/docker.sock | grep -v root:docker The above command should not return

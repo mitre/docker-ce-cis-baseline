@@ -1,4 +1,4 @@
-control "M-1.13" do
+control 'M-1.13' do
   title "1.13 Ensure auditing is configured for Docker files and directories
   /usr/bin/docker-runc (Scored)"
   desc  "
@@ -10,11 +10,11 @@ control "M-1.13" do
   if applicable.
   "
   impact 0.5
-  tag "severity": "medium"
-  tag "cis_id": "1.13"
-  tag "cis_control": ["14.6", "6.1"]
-  tag "cis_level": "Level 1 - Linux Host OS"
-  tag "nist": ["AU-2", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '1.13'
+  tag "cis_control": ['14.6', '6.1']
+  tag "cis_level": 'Level 1 - Linux Host OS'
+  tag "nist": ['AU-2', '4']
   tag "check_text": "Verify that there is an audit rule corresponding to
   /usr/bin/docker-runc file. For example, execute below command: auditctl -l |
   grep /usr/bin/docker-runc This should list a rule for /usr/bin/docker-runc

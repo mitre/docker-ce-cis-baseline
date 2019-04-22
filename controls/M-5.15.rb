@@ -1,4 +1,4 @@
-control "M-5.15" do
+control 'M-5.15' do
   title "5.15 Ensure the host's process namespace is not shared (Scored)"
   desc  "Process ID (PID) namespaces isolate the process ID number space, meaning
   that processes in different PID namespaces can have the same PID. This is a process level
@@ -16,11 +16,11 @@ control "M-5.15" do
   tag "ref": "1.
   https://docs.docker.com/engine/reference/run/#pid-settings-pid2.
   http://man7.org/linux/man-pages/man7/pid_namespaces.7.html"
-  tag "severity": "medium"
-  tag "cis_id": "5.15"
-  tag "cis_control": ["18", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["SI-1", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '5.15'
+  tag "cis_control": ['18', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['SI-1', '4']
   tag "check_text": "docker ps --quiet --all | xargs docker inspect --format '{{ .Id
   }}: PidMode={{ .HostConfig.PidMode }}' If the above command returns host, it
   means the host PID namespace is shared with the container else this
@@ -43,7 +43,7 @@ control "M-5.15" do
   if !docker.containers.running?.ids.empty?
     docker.containers.running?.ids.each do |id|
       describe docker.object(id) do
-        its(%w(HostConfig PidMode)) { should_not eq 'host' }
+        its(%w{HostConfig PidMode}) { should_not eq 'host' }
       end
     end
   end

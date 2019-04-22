@@ -1,5 +1,5 @@
-control "M-5.26" do
-  title "5.26 Ensure container health is checked at runtime (Scored)"
+control 'M-5.26' do
+  title '5.26 Ensure container health is checked at runtime (Scored)'
   desc  "If the container image does not have a HEALTHCHECK instruction defined,
   use the --health-cmd parameter at container runtime for checking container health.
   One of the important security triads is availability. If the container
@@ -8,12 +8,12 @@ control "M-5.26" do
   Based on the reported health status, you could take necessary actions.
   "
   impact 0.5
-  tag "ref": "1. https://docs.docker.com/engine/reference/run/#healthcheck"
-  tag "severity": "medium"
-  tag "cis_id": "5.26"
-  tag "cis_control": ["18", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["SI-1", "4"]
+  tag "ref": '1. https://docs.docker.com/engine/reference/run/#healthcheck'
+  tag "severity": 'medium'
+  tag "cis_id": '5.26'
+  tag "cis_control": ['18', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['SI-1', '4']
   tag "check_text": "Run the below command and ensure that all the containers are
   reporting health status: docker ps --quiet | xargs docker inspect --format '{{
   .Id }}: Health={{.State.Health.Status }}'"
@@ -29,13 +29,13 @@ control "M-5.26" do
       get_health.each do |health_status|
         health_status.chomp('"\\"')
         describe "The docker container health check for container #{id}" do
-          subject {health_status} 
-          it {should cmp  "healthy"}
+          subject { health_status }
+          it { should cmp 'healthy' }
         end
       end
     end
-else
-  impact 0.0
+  else
+    impact 0.0
     describe 'There are no docker containers running, therefore this control is N/A' do
       skip 'There are no docker containers running, therefore this control is N/A'
     end

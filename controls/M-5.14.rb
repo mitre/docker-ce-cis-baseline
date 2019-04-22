@@ -1,4 +1,4 @@
-control "M-5.14" do
+control 'M-5.14' do
   title "5.14 Ensure 'on-failure' container restart policy is set to '5' (Scored)"
   desc  "Using the --restart flag in the docker run command you can specify a restart
   policy for how a container should or should not be restarted on exit. You should choose the
@@ -8,18 +8,18 @@ control "M-5.14" do
   service attack especially if you have many containers on the same host. Additionally,
   ignoring the exit status of the container and always attempting to restart the container
   leads to noninvestigation of the root cause behind containers getting
-  terminated. If a container gets terminated, you should investigate the reason behind it 
+  terminated. If a container gets terminated, you should investigate the reason behind it
   instead of just attempting to restart it indefinitely. Thus, it is recommended to the
   use on-failure restart policy and limit it to maximum of 5 restart attempts.
   "
   impact 0.5
   tag "ref": "1.
   https://docs.docker.com/engine/reference/commandline/run/#restart-policiesrestart"
-  tag "severity": "medium"
-  tag "cis_id": "5.14"
-  tag "cis_control": ["18", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["SI-1", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '5.14'
+  tag "cis_control": ['18', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['SI-1', '4']
   tag "check_text": "docker ps --quiet --all | xargs docker inspect --format '{{ .Id
   }}: RestartPolicyName={{ .HostConfig.RestartPolicy.Name }}
   MaximumRetryCount={{.HostConfig.RestartPolicy.MaximumRetryCount }}' If
@@ -45,15 +45,15 @@ control "M-5.14" do
     end
   end
 
-    if !docker.containers.running?.ids.empty?
+  if !docker.containers.running?.ids.empty?
     docker.containers.running?.ids.each do |id|
       describe.one do
         describe docker.object(id) do
-          its(%w(HostConfig RestartPolicy Name)) { should eq 'no' }
+          its(%w{HostConfig RestartPolicy Name}) { should eq 'no' }
         end
         describe docker.object(id) do
-          its(%w(HostConfig RestartPolicy Name)) { should eq 'on-failure' }
-          its(%w(HostConfig RestartPolicy MaximumRetryCount)) { should eq 5 }
+          its(%w{HostConfig RestartPolicy Name}) { should eq 'on-failure' }
+          its(%w{HostConfig RestartPolicy MaximumRetryCount}) { should eq 5 }
         end
       end
     end

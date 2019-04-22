@@ -1,16 +1,16 @@
-control "M-2.12" do
-  title "2.12 Ensure centralized and remote logging is configured (Scored)"
+control 'M-2.12' do
+  title '2.12 Ensure centralized and remote logging is configured (Scored)'
   desc  "Docker now supports various log drivers. A preferable way to store logs is
   the one that supports centralized and remote logging.
   Centralized and remote logging ensures that all important log records are
   safe despite catastrophic events. Docker now supports various such logging drivers. Use
   the one that suits your environment the best."
   impact 0.5
-  tag "severity": "medium"
-  tag "cis_id": "2.12"
-  tag "cis_control": ["6.6", "6.1"]
-  tag "cis_level": "Level 2 - Docker"
-  tag "nist": ["SI-4(2)", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '2.12'
+  tag "cis_control": ['6.6', '6.1']
+  tag "cis_level": 'Level 2 - Docker'
+  tag "nist": ['SI-4(2)', '4']
   tag "check_text": "Run docker info and ensure that the LoggingDriver property is set
   as appropriate. docker info --format '{{ .LoggingDriver }}' Alternatively,
   the below command would give you the --log-driver setting, if

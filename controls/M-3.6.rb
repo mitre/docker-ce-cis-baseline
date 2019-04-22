@@ -1,16 +1,16 @@
-control "M-3.6" do
-  title "3.6 Ensure that /etc/docker directory permissions are set to 755 or more restrictive (Scored)"
+control 'M-3.6' do
+  title '3.6 Ensure that /etc/docker directory permissions are set to 755 or more restrictive (Scored)'
   desc  "Verify that the /etc/docker directory permissions are correctly set to 755 or more restrictive.
   The /etc/docker directory contains certificates and keys in addition to various
   sensitive files. Hence, it should only be writable by root to maintain the integrity of the directory.
   "
   impact 0.5
-  tag "ref": "1. https://docs.docker.com/engine/security/https/"
-  tag "severity": "medium"
-  tag "cis_id": "3.6"
-  tag "cis_control": ["14.4", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["AC-3 (3)", "4"]
+  tag "ref": '1. https://docs.docker.com/engine/security/https/'
+  tag "severity": 'medium'
+  tag "cis_id": '3.6'
+  tag "cis_control": ['14.4', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['AC-3 (3)', '4']
   tag "check_text": "Execute the below command to verify that the directory has
   permissions of 755 or more restrictive: stat -c %a /etc/docker"
   tag "fix": "chmod 755 /etc/docker This would set the permissions for the

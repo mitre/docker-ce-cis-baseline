@@ -1,4 +1,4 @@
-control "M-5.20" do
+control 'M-5.20' do
   title "5.20 Ensure the host's UTS namespace is not shared (Scored)"
   desc  "The UTS namespaces provide isolation of two system identifiers: the hostname
   and the NIS domain name. It is used for setting the hostname and the domain that is
@@ -11,11 +11,11 @@ control "M-5.20" do
   tag "ref": "1.
   https://docs.docker.com/engine/reference/run/#uts-settings-uts2.
   http://man7.org/linux/man-pages/man7/namespaces.7.html"
-  tag "severity": "medium"
-  tag "cis_id": "5.20"
-  tag "cis_control": ["18", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["SI-1", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '5.20'
+  tag "cis_control": ['18', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['SI-1', '4']
   tag "check_text": "docker ps --quiet --all | xargs docker inspect --format '{{ .Id
   }}: UTSMode={{ .HostConfig.UTSMode }}' If the above command returns host, it
   means the host UTS namespace is shared with the container and this
@@ -40,7 +40,7 @@ control "M-5.20" do
   if !docker.containers.running?.ids.empty?
     docker.containers.running?.ids.each do |id|
       describe docker.object(id) do
-        its(%w(HostConfig UTSMode)) { should_not eq 'host' }
+        its(%w{HostConfig UTSMode}) { should_not eq 'host' }
       end
     end
   end

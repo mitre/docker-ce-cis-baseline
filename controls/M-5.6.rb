@@ -1,5 +1,5 @@
-control "M-5.6" do
-  title "5.6 Ensure ssh is not run within containers (Scored)"
+control 'M-5.6' do
+  title '5.6 Ensure ssh is not run within containers (Scored)'
   desc  "SSH server should not be running within the container. You should SSH into
   the Docker host, and use nsenter tool to enter a container from a remote host.
   Running SSH within the container increases the complexity of security
@@ -13,11 +13,11 @@ control "M-5.6" do
   impact 0.5
   tag "ref": "1.
   http://blog.docker.com/2014/06/why-you-dont-need-to-run-sshd-in-docker/"
-  tag "severity": "medium"
-  tag "cis_id": "5.6"
-  tag "cis_control": ["9.1", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["CM-7(1)", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '5.6'
+  tag "cis_control": ['9.1', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['CM-7(1)', '4']
   tag "check_text": "Step 1: List all the running instances of containers by
   executing the below command: docker ps --quiet Step 2: For each container
   instance, execute the below command: docker exec $INSTANCE_ID ps -el Ensure

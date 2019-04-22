@@ -1,5 +1,5 @@
-control "M-5.28" do
-  title "5.28 Ensure PIDs cgroup limit is used (Scored)"
+control 'M-5.28' do
+  title '5.28 Ensure PIDs cgroup limit is used (Scored)'
   desc  "Use the --pids-limit flag at container runtime.
   Attackers could launch a fork bomb with a single command inside the
   container. This fork bomb can crash the entire system and requires a restart of the host to make
@@ -9,11 +9,11 @@ control "M-5.28" do
   impact 0.5
   tag "ref": "1. https://github.com/docker/docker/pull/186972.
   https://docs.docker.com/engine/reference/commandline/run/#options"
-  tag "severity": "medium"
-  tag "cis_id": "5.28"
-  tag "cis_control": ["18", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["SI-1", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '5.28'
+  tag "cis_control": ['18', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['SI-1', '4']
   tag "check_text": "Run the below command and ensure that PidsLimit is not set to 0
   or -1. A PidsLimit of 0 or -1 means that any number of processes can be forked
   inside the container concurrently. docker ps --quiet --all | xargs docker

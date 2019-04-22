@@ -1,15 +1,3 @@
-SWARM_MODE = attribute(
-  'swarm_mode',
-  description: 'define the swarm mode, `active` or `inactive`',
-  default: 'inactive'
-)
-
-SWARM_PORT = attribute(
-  'swarm_port',
-  description: 'port of the swarm node',
-  default: 2377
-)
-
 control "M-7.3" do
   title "7.3 Ensure swarm services are binded to a specific host interface(Scored)"
   desc  "By default, the docker swarm services will listen on all interfaces on the
@@ -37,8 +25,8 @@ control "M-7.3" do
   available host interfaces."
   ref '#--listen- addr', url: 'https://docs.docker.com/engine/reference/commandline/swarm_init/#--listen- addr'
   ref 'recover-from-disaster', url: 'https://docs.docker.com/engine/swarm/admin_guide/#recover-from-disaster'
-  if SWARM_MODE == 'active' 
-    describe port(SWARM_PORT) do
+  if attribute('swarm_mode') == 'active' 
+    describe port(attribute('swarm_port')) do
       its('addresses') { should_not include '0.0.0.0' }
       its('addresses') { should_not include '::' }
     end

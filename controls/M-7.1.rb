@@ -1,9 +1,3 @@
-SWARM_MODE = attribute(
-  'swarm_mode',
-  description: 'define the swarm mode, `active` or `inactive`',
-  default: 'inactive'
-)
-
 control "M-7.1" do
   title "7.1 Ensure swarm mode is not Enabled, if not needed (Scored)"
   desc  "Do not enable swarm mode on a docker engine instance unless needed.
@@ -29,7 +23,7 @@ control "M-7.1" do
   ref 'docker swarm init', url: 'https://docs.docker.com/engine/reference/commandline/swarm_init/'
   if SWARM_MODE == 'active' 
     describe docker.info do
-      its('Swarm.LocalNodeState') { should eq SWARM_MODE }
+      its('Swarm.LocalNodeState') { should eq attribute('swarm_mode') }
     end
   else 
     impact 0.0

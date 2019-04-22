@@ -1,9 +1,3 @@
-APP_ARMOR_PROFILE = attribute(
-  'app_armor_profile',
-  description: 'define apparmor profile for Docker containers. cis-docker-benchmark-5.1',
-  default: 'docker-default'
-)
-
 control "M-5.1" do
   title "5.1 Ensure AppArmor Profile is Enabled (Scored)"
   desc  "AppArmor is an effective and easy-to-use Linux application security system.
@@ -42,7 +36,7 @@ control "M-5.1" do
   only_if { %w(ubuntu debian).include? os[:name] }
   docker.containers.running?.ids.each do |id|
     describe docker.object(id) do
-      its(['AppArmorProfile']) { should include(APP_ARMOR_PROFILE) }
+      its(['AppArmorProfile']) { should include attribute('app_armor_profile') }
       its(['AppArmorProfile']) { should_not eq nil }
     end
   end

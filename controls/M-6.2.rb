@@ -1,9 +1,3 @@
-MANAGEABLE_CONTAINER_NUMBER = attribute(
-  'managable_container_number',
-  description: 'keep number of containers on a host to a manageable total. cis-docker-benchmark-6.5',
-  default: 25
-)
-
 control "M-6.2" do
   title "6.2 Ensure container sprawl is avoided (Not Scored)"
   desc  "Do not keep a large number of containers on the same host.
@@ -44,6 +38,6 @@ control "M-6.2" do
   diff = total_on_host - total_running
 
   describe diff do
-    it { should be <= MANAGEABLE_CONTAINER_NUMBER }
+    it { should be <= attribute('managable_container_number') }
   end
 end

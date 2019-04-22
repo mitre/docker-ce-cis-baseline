@@ -1,22 +1,3 @@
-# attributes
-DAEMON_TLSCACERT = attribute(
-  'daemon_tlscacert',
-  description: 'Trust certs signed only by this CA',
-  default: '/etc/docker/ssl/ca.pem'
-)
-
-DAEMON_TLSCERT = attribute(
-  'daemon_tlscert',
-  description: 'Path to TLS certificate file',
-  default: '/etc/docker/ssl/server_cert.pem'
-)
-
-DAEMON_TLSKEY = attribute(
-  'daemon_tlskey',
-  description: 'Path to TLS key file',
-  default: '/etc/docker/ssl/server_key.pem'
-)
-
 control "M-2.6" do
   title "2.6 Ensure TLS authentication for Docker daemon is configured (Scored)"
   desc  "It is possible to make the Docker daemon to listen on a specific IP and
@@ -48,8 +29,8 @@ control "M-2.6" do
   describe json('/etc/docker/daemon.json') do
     its(['tls']) { should eq(true) }
     its(['tlsverify']) { should eq(true) }
-    its(['tlscacert']) { should eq(DAEMON_TLSCACERT) }
-    its(['tlscert']) { should eq(DAEMON_TLSCERT) }
-    its(['tlskey']) { should eq(DAEMON_TLSKEY) }
+    its(['tlscacert']) { should eq attribute('daemon_tlscacert') }
+    its(['tlscert']) { should eq attribute('daemon_tlscert') }
+    its(['tlskey']) { should eq attribute('daemon_tlskey') }
   end
 end

@@ -1,15 +1,3 @@
-SWARM_MODE = attribute(
-  'swarm_mode',
-  description: 'define the swarm mode, `active` or `inactive`',
-  default: 'inactive'
-)
-
-SWARM_MAX_MANAGER_NODES = attribute(
-  'swarm_max_manager_nodes',
-  description: 'number of manager nodes in a swarm',
-  default: 3
-)
-
 control "M-7.2" do
   title "7.2 Ensure the minimum number of manager nodes have been created in a swarm (Scored)"
   desc  "Ensure that the minimum number of required manager nodes is created in a
@@ -37,9 +25,9 @@ control "M-7.2" do
   tag "Default Value": "A single manager is all that is required to start a given cluster."
   ref 'manage-nodes', url: 'https://docs.docker.com/engine/swarm/manage-nodes/'
   ref 'add-manager-nodes-forfault-tolerance', url: 'https://docs.docker.com/engine/swarm/admin_guide/#/add-manager-nodes-forfault-tolerance'
-  if SWARM_MODE == 'active' 
+  if attribute('swarm_mode') == 'active' 
     describe docker.info do
-      its('Swarm.Managers') { should cmp <= SWARM_MAX_MANAGER_NODES }
+      its('Swarm.Managers') { should cmp <= attribute('swarm_max_manager_nodes') }
     end
   else 
     impact 0.0

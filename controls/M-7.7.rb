@@ -1,9 +1,3 @@
-SWARM_MODE = attribute(
-  'swarm_mode',
-  description: 'define the swarm mode, `active` or `inactive`',
-  default: 'inactive'
-)
-
 control "M-7.7" do
   title "7.7 Ensure swarm manager auto-lock key is rotated periodically (Not Scored)"
   desc  "Rotate the swarm manager auto-lock key periodically.
@@ -27,7 +21,7 @@ control "M-7.7" do
   maintain key rotation records and ensure that you establish a pre-defined
   frequency for key rotation."
   tag "Default Value": "By default, keys are not rotated automatically."
-  if SWARM_MODE == 'active' 
+  if attribute('swarm_mode') == 'active' 
     describe "A manual review is required to ensure the swarm manager auto-lock key is rotated periodically" do
       skip "A manual review is required to ensure the swarm manager auto-lock key is rotated periodically"
     end

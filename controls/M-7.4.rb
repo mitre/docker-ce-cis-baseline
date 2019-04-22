@@ -1,9 +1,3 @@
-SWARM_MODE = attribute(
-  'swarm_mode',
-  description: 'define the swarm mode, `active` or `inactive`',
-  default: 'active'
-)
-
 control "M-7.4" do
   title "7.4 Ensure data exchanged between containers are encrypted on different nodes on the overlay network (Scored)"
   desc  "Encrypt data exchanged between containers on different nodes on the overlay
@@ -27,7 +21,7 @@ control "M-7.4" do
   tag "Default Value": "By default, data exchanged between containers on
   different nodes on the overlay network are not encrypted in the Docker swarm
   mode."
-  if SWARM_MODE == 'active' 
+  if attribute('swarm_mode') == 'active' 
     describe "A manual review is required to ensure data exchanged between containers are encrypted on different nodes on the overlay network" do
       skip "A manual review is required to ensure data exchanged between containers are encrypted on different nodes on the overlay network"
     end

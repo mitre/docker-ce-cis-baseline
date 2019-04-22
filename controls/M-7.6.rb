@@ -1,9 +1,3 @@
-SWARM_MODE = attribute(
-  'swarm_mode',
-  description: 'define the swarm mode, `active` or `inactive`',
-  default: 'active'
-)
-
 control "M-7.6" do
   title "7.6 Ensure swarm manager is run in auto-lock mode (Scored)"
   desc  "Run the docker swarm manager in auto-lock mode.
@@ -30,7 +24,7 @@ control "M-7.6" do
   swarm init --autolock If you want to set --autolock on an existing swarm
   manager node, use the below command. docker swarm update --autolock"
   tag "Default Value": "By default, swarm manager does not run in auto-lock mode."
-  if SWARM_MODE == 'active' 
+  if attribute('swarm_mode') == 'active' 
     autolock_mode = command("docker swarm unlock-key").stdout.chomp.length
  
     describe 'The swarn mananager auto-lock mode' do

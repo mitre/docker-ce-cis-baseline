@@ -1,9 +1,3 @@
-ALLOWED_PORTS = attribute(
-  'allowed_ports',
-  description: 'The list of allowed docker container ports',
-  default: []
-)
-
 control "M-5.8" do
   title "5.8 Ensure only needed ports are open on the container (Scored)"
   desc  "The Dockerfile for a container image defines the ports to be opened by default
@@ -49,7 +43,7 @@ control "M-5.8" do
           hostport = host['HostPort'] 
           describe "The docker container host port #{hostport} for container #{id}" do
             subject {hostport}
-            it { should be_in ALLOWED_PORTS }
+            it { should be_in attribute('allowed_ports') }
           end
         end
         else

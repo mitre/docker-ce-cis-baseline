@@ -29,7 +29,7 @@ control "M-7.9" do
   tag "fix": "Run the below command to rotate the certificate. docker swarm ca --rotate"
   tag "Default Value": "By default, root CA certificates are not rotated."
 
-  if SWARM_MODE == 'active' 
+  if attribute('swarm_mode') == 'active' 
     swarm_root_ca_crt = command('ls -l /var/lib/docker/swarm/certificates/swarm-root-ca.crt').stdout.strip
     describe "A manual review of the swarm root ca certificate: #{swarm_root_ca_crt} is required to ensure it is rotated as appropriate" do
       skip "A manual review of the swarm root ca certificate: #{swarm_root_ca_crt} is required to ensure it is rotated as appropriate"

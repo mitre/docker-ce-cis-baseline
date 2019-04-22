@@ -33,7 +33,7 @@ control "M-7.10" do
   tag "Default Value": "By default, the data plane traffic is not separated
   from management plane traffic."
 
-  if SWARM_MODE == 'active' 
+  if attribute('swarm_mode') == 'active' 
     describe 'A manual review is required to ensure management plane traffic has been separated from data plane traffic' do
       skip 'A manual review is required to ensure management plane traffic has been separated from data plane traffic'
   end

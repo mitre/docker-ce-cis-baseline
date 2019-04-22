@@ -1,9 +1,3 @@
-SWARM_MODE = attribute(
-  'swarm_mode',
-  description: 'define the swarm mode, `active` or `inactive`',
-  default: 'inactive'
-)
-
 control "M-7.8" do
   title "7.8 Ensure node certificates are rotated as appropriate (Not Scored)"
   desc  "Rotate swarm node certificates as appropriate.
@@ -27,7 +21,7 @@ control "M-7.8" do
   example, docker swarm update --cert-expiry 48h"
   tag "Default Value": "By default, node certificates are rotated automatically every 90 days."
 
-  if SWARM_MODE == 'active' 
+  if attribute('swarm_mode') == 'active' 
     swarm_root_ca_expiry = command('docker info | grep "Expiry Duration" ').stdout.strip
     describe "A manual review of the swarm root ca certificate expiry duration : #{swarm_root_ca_expiry} is required to ensure it is rotated as appropriate" do
       skip "A manual review of the swarm root ca certificate expiry duration : #{swarm_root_ca_expiry} is required to ensure it is rotated as appropriate"

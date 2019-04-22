@@ -1,9 +1,3 @@
-SWARM_MODE = attribute(
-  'swarm_mode',
-  description: 'define the swarm mode, `active` or `inactive`',
-  default: 'active'
-)
-
 control "M-7.5" do
   title "7.5 Ensure Docker's secret management commands are used for managing secrets in a Swarm cluster (Not Scored)"
   desc  "Use Docker's in-built secret management command.
@@ -23,7 +17,7 @@ control "M-7.5" do
   secret ls"
   tag "fix": "Follow docker secret documentation and use it to manage secrets effectively."
   tag "Default Value": "Not Applicable"
-  if SWARM_MODE == 'active' 
+  if attribute('swarm_mode') == 'active' 
     secret_management_commands = command('docker secret ls -q').stdout.split("\n").length
  
     describe 'The docker secret management commands' do

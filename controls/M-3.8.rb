@@ -1,9 +1,3 @@
-REGISTRY_CA_FILE = attribute(
-  'registry_ca_file',
-  description: 'certificate file for a certain Docker registry certificate files. cis-docker-benchmark-3.7 and cis-docker-benchmark-3.8',
-  default: '/etc/docker/certs.d/registry_hostname:port/ca.crt'
-)
-
 control "M-3.8" do
   title "3.8 Ensure that registry certificate file permissions are set to 444 or more restrictive (Scored)"
   desc  "Verify that all the registry certificate files (usually found under /etc/docker/certs.d/<registry-name> directory) have permissions of 444 or
@@ -29,7 +23,7 @@ control "M-3.8" do
   ref url: 'https://docs.docker.com/engine/security/certificates/'
   ref url: 'docs.docker.com/reference/commandline/cli/#insecure-registries'
 
-  describe file(REGISTRY_CA_FILE) do
+  describe file(attribute('registry_ca_file')) do
     it { should exist }
     it { should be_file }
     it { should be_readable }

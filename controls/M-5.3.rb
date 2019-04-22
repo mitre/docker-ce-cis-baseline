@@ -1,9 +1,3 @@
-# attributes
-CONTAINER_CAPADD = attribute(
-  'container_capadd',
-  description: 'define needed capabilities for containers.'
-)
-
 control "M-5.3" do
   title "5.3 Ensure Linux Kernel Capabilities are restricted within containers (Scored)"
   desc  "By default, Docker starts containers with a restricted set of Linux Kernel
@@ -56,7 +50,7 @@ control "M-5.3" do
     describe docker.object(id) do
       its(%w(HostConfig CapDrop)) { should include(/all/) }
       its(%w(HostConfig CapDrop)) { should_not eq nil }
-      its(%w(HostConfig CapAdd)) { should eq CONTAINER_CAPADD }
+      its(%w(HostConfig CapAdd)) { should eq attribute('container_capadd') }
     end
   end
 end

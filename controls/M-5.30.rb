@@ -26,9 +26,18 @@ control "M-5.30" do
   tag "Default Value": "By default, the host user namespace is shared with the
   containers until user namespace support is enabled."
 
-  docker.containers.running?.ids.each do |id|
-    describe docker.object(id) do
-      its('HostConfig.UsernsMode') { should eq '' }
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      describe docker.object(id) do
+        its('HostConfig.UsernsMode') { should eq '' }
+      end
     end
   end
 end

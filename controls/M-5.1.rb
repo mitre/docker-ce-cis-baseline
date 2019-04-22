@@ -34,10 +34,20 @@ control "M-5.1" do
   ref 'http://wiki.apparmor.net/index.php/Main_Page'
 
   only_if { %w(ubuntu debian).include? os[:name] }
-  docker.containers.running?.ids.each do |id|
-    describe docker.object(id) do
-      its(['AppArmorProfile']) { should include attribute('app_armor_profile') }
-      its(['AppArmorProfile']) { should_not eq nil }
+
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      describe docker.object(id) do
+        its(['AppArmorProfile']) { should include attribute('app_armor_profile') }
+        its(['AppArmorProfile']) { should_not eq nil }
+      end
     end
   end
 end

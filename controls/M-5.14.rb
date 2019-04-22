@@ -38,14 +38,23 @@ control "M-5.14" do
   policies. Hence, containers do not attempt to restart on their own."
   ref url: 'https://docs.docker.com/engine/reference/commandline/cli/#restart-policies'
 
-  docker.containers.running?.ids.each do |id|
-    describe.one do
-      describe docker.object(id) do
-        its(%w(HostConfig RestartPolicy Name)) { should eq 'no' }
-      end
-      describe docker.object(id) do
-        its(%w(HostConfig RestartPolicy Name)) { should eq 'on-failure' }
-        its(%w(HostConfig RestartPolicy MaximumRetryCount)) { should eq 5 }
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+    if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      describe.one do
+        describe docker.object(id) do
+          its(%w(HostConfig RestartPolicy Name)) { should eq 'no' }
+        end
+        describe docker.object(id) do
+          its(%w(HostConfig RestartPolicy Name)) { should eq 'on-failure' }
+          its(%w(HostConfig RestartPolicy MaximumRetryCount)) { should eq 5 }
+        end
       end
     end
   end

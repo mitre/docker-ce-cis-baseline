@@ -38,10 +38,19 @@ control "M-5.21" do
   ref url: 'https://www.kernel.org/doc/Documentation/prctl/seccomp_filter.txt'
   ref url: 'https://github.com/docker/docker/pull/17034'
 
-  docker.containers.running?.ids.each do |id|
-    describe docker.object(id) do
-      its(%w(HostConfig SecurityOpt)) { should include(/seccomp/) }
-      its(%w(HostConfig SecurityOpt)) { should_not include(/seccomp[=|:]unconfined/) }
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      describe docker.object(id) do
+        its(%w(HostConfig SecurityOpt)) { should include(/seccomp/) }
+        its(%w(HostConfig SecurityOpt)) { should_not include(/seccomp[=|:]unconfined/) }
+      end
     end
   end
 end

@@ -26,11 +26,19 @@ control "M-5.28" do
   tag "Default Value": "The Default value for the --pids-limit is 0 which means
   there is no restriction on the number of forks. Also, note that the PIDs cgroup
   limit works only for the kernel versions 4.3+."
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
 
-  docker.containers.running?.ids.each do |id|
-    describe docker.object(id) do
-      its('HostConfig.PidsLimit') { should_not cmp 0 }
-      its('HostConfig.PidsLimit') { should_not cmp(-1) }
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      describe docker.object(id) do
+        its('HostConfig.PidsLimit') { should_not cmp 0 }
+        its('HostConfig.PidsLimit') { should_not cmp(-1) }
+      end
     end
   end
 end

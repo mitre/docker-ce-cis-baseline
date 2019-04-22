@@ -32,10 +32,19 @@ control "M-5.19" do
   ref url: 'https://docs.docker.com/engine/reference/run/'
   ref url: 'https://www.kernel.org/doc/Documentation/filesystems/sharedsubtree.txt'
 
-  docker.containers.running?.ids.each do |id|
-    raw = command("docker inspect --format '{{range $mnt := .Mounts}} {{json $mnt.Propagation}} {{end}}' #{id}").stdout
-    describe raw.delete("\n").delete('\"').delete(' ') do
-      it { should_not eq 'shared' }
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      raw = command("docker inspect --format '{{range $mnt := .Mounts}} {{json $mnt.Propagation}} {{end}}' #{id}").stdout
+      describe raw.delete("\n").delete('\"').delete(' ') do
+        it { should_not eq 'shared' }
+      end
     end
   end
 end

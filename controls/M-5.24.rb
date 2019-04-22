@@ -31,9 +31,18 @@ control "M-5.24" do
   ref url: 'https://docs.docker.com/engine/reference/run/#specifying-custom-cgroups'
   ref url: 'https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Resource_Management_Guide/ch01.html'
 
-  docker.containers.running?.ids.each do |id|
-    describe docker.object(id) do
-      its(%w(HostConfig CgroupParent)) { should be_empty }
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      describe docker.object(id) do
+        its(%w(HostConfig CgroupParent)) { should be_empty }
+      end
     end
   end
 end

@@ -30,9 +30,18 @@ control "M-4.7" do
   tag "Default Value": "By default, docker does not enforce any restrictions on
   using update instructions."
 
-  docker.images.ids.each do |id|
-    describe command("docker history #{id}| grep -e 'update'") do
-      its('stdout') { should eq '' }
+  if docker.images.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+  if !docker.images.ids.empty?
+    docker.images.ids.each do |id|
+      describe command("docker history #{id}| grep -e 'update'") do
+        its('stdout') { should eq '' }
+      end
     end
   end
 end

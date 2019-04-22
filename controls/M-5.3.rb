@@ -45,12 +45,20 @@ control "M-5.3" do
   ref url: 'https://docs.docker.com/engine/security/security/'
   ref url: 'http://man7.org/linux/man-pages/man7/capabilities.7.html'
   ref url: 'https://github.com/docker/docker/blob/master/oci/defaults_linux.go#L64-L79'
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
 
-  docker.containers.running?.ids.each do |id|
-    describe docker.object(id) do
-      its(%w(HostConfig CapDrop)) { should include(/all/) }
-      its(%w(HostConfig CapDrop)) { should_not eq nil }
-      its(%w(HostConfig CapAdd)) { should eq attribute('container_capadd') }
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      describe docker.object(id) do
+        its(%w(HostConfig CapDrop)) { should include(/all/) }
+        its(%w(HostConfig CapDrop)) { should_not eq nil }
+        its(%w(HostConfig CapAdd)) { should eq attribute('container_capadd') }
+      end
     end
   end
 end

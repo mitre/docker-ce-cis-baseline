@@ -39,9 +39,18 @@ control "M-5.10" do
   ref url: 'https://docs.docker.com/engine/reference/commandline/cli/#run'
   ref url: 'https://docs.docker.com/v1.8/articles/runmetrics/'
 
-  docker.containers.running?.ids.each do |id|
-    describe docker.object(id) do
-      its(%w(HostConfig Memory)) { should_not eq 0 }
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      describe docker.object(id) do
+        its(%w(HostConfig Memory)) { should_not eq 0 }
+      end
     end
   end
 end

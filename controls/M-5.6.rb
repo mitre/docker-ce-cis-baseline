@@ -30,10 +30,19 @@ control "M-5.6" do
   container. Only one process per container is allowed."
   ref url: 'https://blog.docker.com/2014/06/why-you-dont-need-to-run-sshd-in-docker/'
 
-  docker.containers.running?.ids.each do |id|
-    execute_command = 'docker exec ' + id + ' ps -e'
-    describe command(execute_command) do
-      its('stdout') { should_not match(/ssh/) }
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      execute_command = 'docker exec ' + id + ' ps -e'
+      describe command(execute_command) do
+        its('stdout') { should_not match(/ssh/) }
+      end
     end
   end
 end

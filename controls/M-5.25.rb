@@ -28,9 +28,18 @@ control "M-5.25" do
   ref url: 'https://lwn.net/Articles/475678/'
   ref url: 'https://lwn.net/Articles/475362/'
 
-  docker.containers.running?.ids.each do |id|
-    describe docker.object(id) do
-      its(%w(HostConfig SecurityOpt)) { should include(/no-new-privileges/) }
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      describe docker.object(id) do
+        its(%w(HostConfig SecurityOpt)) { should include(/no-new-privileges/) }
+      end
     end
   end
 end

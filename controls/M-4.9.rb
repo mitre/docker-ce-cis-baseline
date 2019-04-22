@@ -23,9 +23,18 @@ control "M-4.9" do
   tag "fix": "Use COPY instructions in Dockerfiles."
   tag "Default Value": "Not Applicable"
   
-  docker.images.ids.each do |id|
-    describe command("docker history #{id}| grep 'ADD'") do
-      its('stdout') { should eq '' }
+  if docker.images.ids.empty?
+    impact 0.0
+    describe 'There are no docker images, therfore this control is N/A' do
+      skip 'There are no docker images, therfore this control is N/A'
+    end
+  end
+
+  if !docker.images.ids.empty?
+    docker.images.ids.each do |id|
+      describe command("docker history #{id}| grep 'ADD'") do
+        its('stdout') { should eq '' }
+      end
     end
   end
 end

@@ -22,9 +22,18 @@ control "M-4.6" do
   HEALTHCHECK instruction."
   tag "Default Value": "By default, HEALTHCHECK is not set."
 
-  docker.containers.running?.ids.each do |id|
-    describe docker.object(id) do
-      its(%w(Config Healthcheck)) { should_not eq nil }
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      describe docker.object(id) do
+        its(%w(Config Healthcheck)) { should_not eq nil }
+      end
     end
   end
 end

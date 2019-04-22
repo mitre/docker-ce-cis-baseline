@@ -33,9 +33,18 @@ control "M-5.18" do
   set at the Docker daemon level."
   ref url: 'https://docs.docker.com/engine/reference/commandline/cli/#setting-ulimits-in-a-container'
 
-  docker.containers.running?.ids.each do |id|
-    describe docker.object(id) do
-      its(%w(HostConfig Ulimits)) { should eq nil }
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      describe docker.object(id) do
+        its(%w(HostConfig Ulimits)) { should eq nil }
+      end
     end
   end
 end

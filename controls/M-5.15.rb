@@ -33,9 +33,18 @@ control "M-5.15" do
   ref url: 'https://docs.docker.com/engine/reference/run/#pid-settings'
   ref url: 'http://man7.org/linux/man-pages/man7/pid_namespaces.7.html'
 
-  docker.containers.running?.ids.each do |id|
-    describe docker.object(id) do
-      its(%w(HostConfig PidMode)) { should_not eq 'host' }
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      describe docker.object(id) do
+        its(%w(HostConfig PidMode)) { should_not eq 'host' }
+      end
     end
   end
 end

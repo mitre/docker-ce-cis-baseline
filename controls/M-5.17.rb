@@ -44,9 +44,18 @@ control "M-5.17" do
   permissions."
   ref url: 'https://docs.docker.com/engine/reference/commandline/cli/#run'
 
-  docker.containers.running?.ids.each do |id|
-    describe docker.object(id) do
-      its(%w(HostConfig Devices)) { should be_empty }
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      describe docker.object(id) do
+        its(%w(HostConfig Devices)) { should be_empty }
+      end
     end
   end
 end

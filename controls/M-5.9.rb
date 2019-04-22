@@ -26,9 +26,18 @@ control "M-5.9" do
   ref url: 'https://docs.docker.com/engine/userguide/networking/dockernetworks/'
   ref url: 'https://github.com/docker/docker/issues/6401'
 
-  docker.containers.running?.ids.each do |id|
-    describe docker.object(id) do
-      its(%w(HostConfig NetworkMode)) { should_not eq 'host' }
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      describe docker.object(id) do
+        its(%w(HostConfig NetworkMode)) { should_not eq 'host' }
+      end
     end
   end
 end

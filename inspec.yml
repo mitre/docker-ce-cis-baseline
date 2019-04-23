@@ -1,8 +1,103 @@
 name: cis-docker-ce-profile
 title: CIS Docker Community Edition
 maintainer: MITRE InSpec Team
-copyright: 
+copyright: The MITRE Corporation, 2018
 copyright_email: inspec_support@mitre.org
 license: Apache-2.0
 summary: The CIS Docker Community Edition Benchmark v1.1.0 InSpec profile.
 version: 1.1.0
+
+attributes:
+  - name: trusted_user
+    description: 'Trusted system user'
+    type: string
+    default: 'vagrant'
+
+  - name: managable_container_number
+    description: 'Number of managable docker containers'
+    type: numeric
+    default: 25
+
+  - name: registry_cert_path
+    description: 'Docker registry cert path'
+    type: string
+    default: '/etc/docker/certs.d'
+
+  - name: registry_name
+    description: 'directory contain certificate certain Docker registry. cis-docker-benchmark-3.7'
+    type: string
+    default: '/etc/docker/certs.d/registry_hostname:port'
+
+  - name: registry_ca_file
+    description: 'certificate file for a certain Docker registry certificate files. cis-docker-benchmark-3.7 and cis-docker-benchmark-3.8'
+    type: string
+    default: '/etc/docker/certs.d/registry_hostname:port/ca.crt'
+
+  - name: container_user
+    description: 'Docker container user'
+    type: string
+    default: 'vagrant'
+
+  - name: authorization_plugin
+    description: 'authorization plugin'
+    type: string
+    default: 'authz-broker'
+
+  - name: log_driver
+    description: 'log driver'
+    type: string
+    default: 'syslog'
+
+  - name: log_opts
+    description: 'log opts'
+    type: string
+    default: '/syslog-address/'
+
+  - name: app_armor_profile
+    description: 'app armor profile'
+    type: string
+    default: 'docker-default'
+
+  - name: selinux_profile
+    description: 'selinux profile'
+    type: string
+    default: '/label\:level\:s0-s0\:c1023/'
+
+  - name: daemon_tlscacert
+    description: 'Trust certs signed only by this CA'
+    type: string
+    default: '/etc/docker/ssl/ca.pem'
+
+  - name: daemon_tlscert
+    description: 'Path to TLS certificate file'
+    type: string
+    default: '/etc/docker/ssl/server_cert.pem'
+
+  - name: daemon_tlskey
+    description: 'Path to TLS key file'
+    type: string
+    default: '/etc/docker/ssl/server_key.pem'
+
+  - name: allowed_ports
+    description: 'The list of allowed docker container ports'
+    type: array
+    default: [] 
+
+  - name: swarm_mode
+    description: 'define the swarm mode, `active` or `inactive`'
+    type: string
+    default: 'inactive'
+
+  - name: swarm_max_manager_nodes
+    description: 'number of manager nodes in a swarm'
+    type: numeric
+    default: 3 
+
+  - name: swarm_port
+    description: 'port of the swarm node'
+    type: numeric
+    default: 2377
+
+
+
+

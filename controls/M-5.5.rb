@@ -1,5 +1,5 @@
-control "M-5.5" do
-  title "5.5 Ensure sensitive host system directories are not mounted on containers (Scored)"
+control 'M-5.5' do
+  title '5.5 Ensure sensitive host system directories are not mounted on containers (Scored)'
   desc  "Sensitive host system directories such as below should not be allowed to be
   mounted as container volumes especially in read-write mode.
   /
@@ -17,11 +17,11 @@ control "M-5.5" do
   "
   impact 0.5
   tag "ref": "1. https://docs.docker.com/engine/tutorials/dockervolumes/\n"
-  tag "severity": "medium"
-  tag "cis_id": "5.5"
-  tag "cis_control": ["14", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["AC-6", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '5.5'
+  tag "cis_control": ['14', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['AC-6', '4']
   tag "check_text": "docker ps --quiet --all | xargs docker inspect --format '{{ .Id
   }}: Volumes={{ .Mounts }}' The above commands would return the list of
   current mapped directories and whether they are mounted in read-write mode for

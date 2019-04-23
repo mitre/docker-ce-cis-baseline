@@ -1,5 +1,5 @@
-control "M-4.4" do
-  title "4.4 Ensure images are scanned and rebuilt to include security patches (Not Scored)"
+control 'M-4.4' do
+  title '4.4 Ensure images are scanned and rebuilt to include security patches (Not Scored)'
   desc  "Images should be scanned frequently for any vulnerabilities. Rebuild
   the images toinclude patches and then instantiate new containers from it.
   Vulnerabilities are loopholes/bugs that can be exploited and security
@@ -14,11 +14,11 @@ control "M-4.4" do
   impact 0.5
   tag "ref": "1.2.3.4.https://docs.docker.com/userguide/dockerimages/
   https://docs.docker.com/docker-cloud/builds/image-scan/ https://blog.docker.com/2016/05/docker-security-scanning/ https://docs.docker.com/engine/reference/builder/#/onbuild"
-  tag "severity": "medium"
-  tag "cis_id": "4.4"
-  tag "cis_control": ["18.1", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["SI-2", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '4.4'
+  tag "cis_control": ['18.1', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['SI-2', '4']
   tag "check_text": "Step 1: List all the running instances of containers by
   executing below command: docker ps --quiet Step 2: For each container
   instance, execute the below or equivalent command to find the list of packages

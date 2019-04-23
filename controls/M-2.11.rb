@@ -1,11 +1,5 @@
-AUTHORIZATION_PLUGIN = attribute(
-  'authorization_plugin',
-  description: 'define authorization plugin to manage access to Docker daemon. cis-docker-benchmark-2.11',
-  default: 'authz-broker'
-)
-
-control "M-2.11" do
-  title "2.11 Ensure that authorization for Docker client commands is enabled(Scored)"
+control 'M-2.11' do
+  title '2.11 Ensure that authorization for Docker client commands is enabled(Scored)'
   desc  "Use native Docker authorization plugins or a third party authorization
   mechanism with Docker daemon to manage access to Docker client commands.
   Docker’s out-of-the-box authorization model is all or nothing. Any user
@@ -19,18 +13,18 @@ control "M-2.11" do
   authorization plugin (i.e. Kubernetes, Cloud Foundry, Openshift).
   "
   impact 0.5
-  tag "severity": "medium"
-  tag "cis_id": "2.11"
-  tag "cis_control": ["16", "6.1"]
-  tag "cis_level": "Level 2 - Docker"
-  tag "nist": ["AC-2", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '2.11'
+  tag "cis_control": ['16', '6.1']
+  tag "cis_level": 'Level 2 - Docker'
+  tag "nist": ['AC-2', '4']
   tag "check_text": "ps -ef | grep dockerd Ensure that the --authorization-plugin
   parameter is set as appropriate if using docker native authorization. docker
   search hello-world Ensure that docker daemon requires authorization to perform the above command."
   tag "fix": "Step 1: Install/Create an authorization plugin. Step 2:
   Configure the authorization policy as desired. Step 3: Start the docker daemon
   as below: dockerd --authorization-plugin=<PLUGIN_ID>"
-  tag "Default Value": "By default, authorization plugins are not set up."
+  tag "Default Value": 'By default, authorization plugins are not set up.'
   ref 'Access authorization', url: 'https://docs.docker.com/engine/reference/commandline/daemon/#access-authorization'
   ref 'access-authorization', url: 'https://docs.docker.com/engine/reference/commandline/dockerd/#access- authorization'
   ref 'Auhtorization plugins', url: 'https://docs.docker.com/engine/extend/plugins_authorization/'
@@ -38,6 +32,6 @@ control "M-2.11" do
 
   describe json('/etc/docker/daemon.json') do
     its(['authorization-plugins']) { should_not be_empty }
-    its(['authorization-plugins']) { should eq([AUTHORIZATION_PLUGIN]) }
+    its(['authorization-plugins']) { should eq attribute('authorization_plugin') }
   end
 end

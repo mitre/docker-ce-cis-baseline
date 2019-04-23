@@ -1,5 +1,5 @@
-control "M-2.10" do
-  title "2.10 Ensure base device size is not changed until needed (Scored)"
+control 'M-2.10' do
+  title '2.10 Ensure base device size is not changed until needed (Scored)'
   desc  "In certain circumstances, you might need containers bigger than 10G in
   size. In these cases, carefully choose the base device size.
   The base device size can be increased at daemon restart. Increasing the
@@ -12,11 +12,11 @@ control "M-2.10" do
   of service by ending up in file system being over-allocated or full.
   "
   impact 0.5
-  tag "severity": "medium"
-  tag "cis_id": "2.10"
-  tag "cis_control": ["18", "6.1"]
-  tag "cis_level": "Level 2 - Docker"
-  tag "nist": ["SI-1", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '2.10'
+  tag "cis_control": ['18', '6.1']
+  tag "cis_level": 'Level 2 - Docker'
+  tag "nist": ['SI-1', '4']
   tag "check_text": "ps -ef | grep dockerd Execute the above command and it should
   not show any --storage-opt dm.basesize parameters."
   tag "fix": "Do not set --storage-opt dm.basesize until needed.\n"

@@ -1,5 +1,5 @@
-control "M-5.10" do
-  title "5.10 Ensure memory usage for container is limited (Scored)"
+control 'M-5.10' do
+  title '5.10 Ensure memory usage for container is limited (Scored)'
   desc  "By default, all containers on a Docker host share the resources equally. By
   using the resource management capabilities of Docker host, such as memory limit, you
   can control the amount of memory that a container may consume.
@@ -14,11 +14,11 @@ control "M-5.10" do
   https://goldmann.pl/blog/2014/09/11/resource-management-in-docker/2.
   https://docs.docker.com/engine/reference/commandline/run/#options3.
   https://docs.docker.com/engine/admin/runmetrics/"
-  tag "severity": "medium"
-  tag "cis_id": "5.10"
-  tag "cis_control": ["18", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["SI-1", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '5.10'
+  tag "cis_control": ['18', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['SI-1', '4']
   tag "check_text": "docker ps --quiet --all | xargs docker inspect --format '{{ .Id
   }}: Memory={{.HostConfig.Memory }}' If the above command returns 0, it means
   the memory limits are not in place. If the above command returns a non-zero
@@ -39,9 +39,18 @@ control "M-5.10" do
   ref url: 'https://docs.docker.com/engine/reference/commandline/cli/#run'
   ref url: 'https://docs.docker.com/v1.8/articles/runmetrics/'
 
-  docker.containers.running?.ids.each do |id|
-    describe docker.object(id) do
-      its(%w(HostConfig Memory)) { should_not eq 0 }
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      describe docker.object(id) do
+        its(%w{HostConfig Memory}) { should_not eq 0 }
+      end
     end
   end
 end

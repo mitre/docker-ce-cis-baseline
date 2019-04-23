@@ -1,11 +1,5 @@
-APP_ARMOR_PROFILE = attribute(
-  'app_armor_profile',
-  description: 'define apparmor profile for Docker containers. cis-docker-benchmark-5.1',
-  default: 'docker-default'
-)
-
-control "M-5.1" do
-  title "5.1 Ensure AppArmor Profile is Enabled (Scored)"
+control 'M-5.1' do
+  title '5.1 Ensure AppArmor Profile is Enabled (Scored)'
   desc  "AppArmor is an effective and easy-to-use Linux application security system.
   It is available on quite a few Linux distributions by default such as Debian and Ubuntu.
   AppArmor protects the Linux OS and applications from various threats by
@@ -17,11 +11,11 @@ control "M-5.1" do
   tag "ref": "1. https://docs.docker.com/engine/security/apparmor/2.
   https://docs.docker.com/engine/reference/run/#security-configuration3.
   https://docs.docker.com/engine/security/security/#other-kernel-security-features"
-  tag "severity": "medium"
-  tag "cis_id": "5.1"
-  tag "cis_control": ["14.4", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["AC-3 (3)", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '5.1'
+  tag "cis_control": ['14.4', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['AC-3 (3)', '4']
   tag "check_text": "docker ps --quiet --all | xargs docker inspect --format '{{ .Id
   }}: AppArmorProfile={{ .AppArmorProfile }}' The above command should return a
   valid AppArmor Profile for each container instance."
@@ -39,11 +33,21 @@ control "M-5.1" do
   ref 'https://docs.docker.com/engine/reference/run/#security-configuration'
   ref 'http://wiki.apparmor.net/index.php/Main_Page'
 
-  only_if { %w(ubuntu debian).include? os[:name] }
-  docker.containers.running?.ids.each do |id|
-    describe docker.object(id) do
-      its(['AppArmorProfile']) { should include(APP_ARMOR_PROFILE) }
-      its(['AppArmorProfile']) { should_not eq nil }
+  only_if { %w{ubuntu debian}.include? os[:name] }
+
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      describe docker.object(id) do
+        its(['AppArmorProfile']) { should include attribute('app_armor_profile') }
+        its(['AppArmorProfile']) { should_not eq nil }
+      end
     end
   end
 end

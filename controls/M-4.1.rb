@@ -1,12 +1,5 @@
-# attributes
-CONTAINER_USER = attribute(
-  'container_user',
-  description: 'define user within containers. cis-docker-benchmark-4.1',
-  default: 'ubuntu'
-)
-
-control "M-4.1" do
-  title "4.1 Ensure a user for the container has been created (Scored)"
+control 'M-4.1' do
+  title '4.1 Ensure a user for the container has been created (Scored)'
   desc  "Create a non-root user for the container in the Dockerfile for the
   container image. It is a good practice to run the container as a non-root user, if possible.
   Though user namespace mapping is now available, if a user is already defined in the
@@ -17,11 +10,11 @@ control "M-4.1" do
   tag "ref": "1. https://github.com/docker/docker/issues/29182.
   https://github.com/docker/docker/pull/45723.
   https://github.com/docker/docker/issues/7906"
-  tag "severity": "medium"
-  tag "cis_id": "4.1"
-  tag "cis_control": ["5.1", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["AC-6(9)", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '4.1'
+  tag "cis_control": ['5.1', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['AC-6(9)', '4']
   tag "check_text": "docker ps --quiet --all | xargs docker inspect --format '{{ .Id
   }}: User={{.Config.User }}' The above command should return container
   username or user ID. If it is blank it means, the container is running as

@@ -1,4 +1,4 @@
-control "M-1.12" do
+control 'M-1.12' do
   title "1.12 Ensure auditing is configured for Docker files and directories
   /usr/bin/docker-containerd (Scored)"
   desc  "Audit /usr/bin/docker-containerd, if applicable.
@@ -9,11 +9,11 @@ control "M-1.12" do
   Docker now relies on containerd and runC to spawn containers. It must be audited, if applicable.
   "
   impact 0.5
-  tag "severity": "medium"
-  tag "cis_id": "1.12"
-  tag "cis_control": ["14.6", "6.1"]
-  tag "cis_level": "Level 1 - Linux Host OS"
-  tag "nist": ["AU-2", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '1.12'
+  tag "cis_control": ['14.6', '6.1']
+  tag "cis_level": 'Level 1 - Linux Host OS'
+  tag "nist": ['AU-2', '4']
   tag "check_text": "Verify that there is an audit rule corresponding to
   /usr/bin/docker-containerd file. For example, execute below command: auditctl
   -l | grep /usr/bin/docker-containerd This should list a rule for

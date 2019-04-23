@@ -1,4 +1,4 @@
-control "M-3.13" do
+control 'M-3.13' do
   title "3.13 Ensure that Docker server certificate key file ownership is set
   to root:root (Scored)"
   desc  "Verify that the Docker server certificate key file (the file that is passed
@@ -10,11 +10,11 @@ control "M-3.13" do
   impact 0.5
   tag "ref": "1. https://docs.docker.com/registry/insecure/\n2.
   https://docs.docker.com/engine/security/https/\n"
-  tag "severity": "medium"
-  tag "cis_id": "3.13"
-  tag "cis_control": ["5.1", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["AC-6(9)", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '3.13'
+  tag "cis_control": ['5.1', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['AC-6(9)', '4']
   tag "check_text": "Execute the below command to verify that the Docker server
   certificate key file is owned and group-owned by root: stat -c %U:%G <path to
   the Docker server certificate key file> | grep -v root:root The above command

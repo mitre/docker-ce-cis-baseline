@@ -1,15 +1,15 @@
-control "M-3.4" do
-  title "3.4 Ensure that docker.socket file permissions are set to 644 or more restrictive (Scored)"
+control 'M-3.4' do
+  title '3.4 Ensure that docker.socket file permissions are set to 644 or more restrictive (Scored)'
   desc  "Verify that the docker.socket file permissions are correctly set to 644 or more restrictive.
-  The docker.socket file contains sensitive parameters that may alter the behavior of the Docker remote API. 
+  The docker.socket file contains sensitive parameters that may alter the behavior of the Docker remote API.
   Hence, it should be writable only by root to maintain the integrity of the file.
   "
   impact 0.5
-  tag "severity": "medium"
-  tag "cis_id": "3.4"
-  tag "cis_control": ["14.4", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["AC-3 (3)", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '3.4'
+  tag "cis_control": ['14.4', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['AC-3 (3)', '4']
   tag "check_text": "Step 1: Find out the file location: systemctl show -p
   FragmentPath docker.socket Step 2: If the file does not exist, this
   recommendation is not applicable. If the file exists, execute the below
@@ -35,14 +35,14 @@ control "M-3.4" do
 
   docker_socket_file = docker_socket_file[equal_sign+1..-1]
 
-  if file("#{docker_socket_file}").exist?
+  if file(docker_socket_file.to_s).exist?
 
-    describe file("docker_socket_file") do
+    describe file('docker_socket_file') do
       it { should exist }
       it { should be_file }
       its('mode') { should cmp <= '0644' }
     end
-  
+
   else
     impact 0.0
     describe 'The docker socket file does not exist, therefore this control is N/A' do

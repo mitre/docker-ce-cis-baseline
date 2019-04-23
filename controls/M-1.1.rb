@@ -1,7 +1,7 @@
-control "M-1.1" do
+control 'M-1.1' do
   title "1.1 Ensure a separate partition for containers has been created
   (Scored)"
-  desc  "All Docker containers and their data and metadata is stored under
+  desc "All Docker containers and their data and metadata is stored under
   /var/lib/docker
   directory. By default, /var/lib/docker would be mounted under / or /var
   partitions based
@@ -15,11 +15,11 @@ control "M-1.1" do
   volume) for storing Docker files.
   "
   impact 0.5
-  tag "severity": "medium"
-  tag "cis_id": "1.1"
-  tag "cis_control": ["14", "6.1"]
-  tag "cis_level": "Level 1 - Linux Host OS"
-  tag "nist": ["AC-6", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '1.1'
+  tag "cis_control": ['14', '6.1']
+  tag "cis_level": 'Level 1 - Linux Host OS'
+  tag "nist": ['AC-6', '4']
   tag "check_text": "At the Docker host execute the below command: grep
   /var/lib/docker /etc/fstab This should return the partition details for
   /var/lib/docker mount point."

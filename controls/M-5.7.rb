@@ -1,5 +1,5 @@
-control "M-5.7" do
-  title "5.7 Ensure privileged ports are not mapped within containers (Scored)"
+control 'M-5.7' do
+  title '5.7 Ensure privileged ports are not mapped within containers (Scored)'
   desc  "The TCP/IP port numbers below 1024 are considered privileged ports. Normal
   users and processes are not allowed to use them for various security reasons. Docker
   allows a container port to be mapped to a privileged port.
@@ -12,12 +12,12 @@ control "M-5.7" do
   privileged data. Allowing containers to use them can bring serious implications.
   "
   impact 0.5
-  tag "ref": "1. https://docs.docker.com/engine/userguide/networking/"
-  tag "severity": "medium"
-  tag "cis_id": "5.7"
-  tag "cis_control": ["9.1", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["CM-7(1)", "4"]
+  tag "ref": '1. https://docs.docker.com/engine/userguide/networking/'
+  tag "severity": 'medium'
+  tag "cis_id": '5.7'
+  tag "cis_control": ['9.1', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['CM-7(1)', '4']
   tag "check_text": "List all running containers instances and their port mapping by
   executing the below command: docker ps --quiet | xargs docker inspect
   --format '{{ .Id }}: Ports={{.NetworkSettings.Ports }}'Review the list and
@@ -40,17 +40,18 @@ control "M-5.7" do
     docker.containers.running?.ids.each do |id|
       container_info = docker.object(id)
       next if container_info['NetworkSettings']['Ports'].nil?
+
       container_info['NetworkSettings']['Ports'].each do |_, hosts|
         if !hosts.nil?
-        hosts.each do |host|
-          describe host['HostPort'].to_i.between?(1, 1024) do
-            it { should eq false }
+          hosts.each do |host|
+            describe host['HostPort'].to_i.between?(1, 1024) do
+              it { should eq false }
+            end
           end
-        end
         else
           describe 'There are no docker container port hosts defined, therefore this control is N/A' do
             skip 'There are no docker container port hosts defined, therefore this control is N/A'
-            end
+          end
         end
       end
     end
@@ -59,5 +60,5 @@ control "M-5.7" do
     describe 'There are no docker containers running, therefore this control is N/A' do
       skip 'There are no docker containers running, therefore this control is N/A'
     end
-  end  
+  end
 end

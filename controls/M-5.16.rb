@@ -1,4 +1,4 @@
-control "M-5.16" do
+control 'M-5.16' do
   title "5.16 Ensure the host's IPC namespace is not shared (Scored)"
   desc  "The IPC (POSIX/SysV IPC) namespace provides separation of named shared memory
   segments, semaphores and message queues. IPC namespace on the host thus should not be
@@ -14,11 +14,11 @@ control "M-5.16" do
   tag "ref": "1.
   https://docs.docker.com/engine/reference/run/#ipc-settings-ipc2.
   http://man7.org/linux/man-pages/man7/namespaces.7.html"
-  tag "severity": "medium"
-  tag "cis_id": "5.16"
-  tag "cis_control": ["18", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["SI-1", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '5.16'
+  tag "cis_control": ['18', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['SI-1', '4']
   tag "check_text": "docker ps --quiet --all | xargs docker inspect --format '{{ .Id
   }}:IpcMode={{ .HostConfig.IpcMode }}' If the above command returns host, it
   means the host IPC namespace is shared with the container. If the above
@@ -32,9 +32,18 @@ control "M-5.16" do
   ref url: 'https://docs.docker.com/engine/reference/run/#ipc-settings'
   ref url: 'http://man7.org/linux/man-pages/man7/pid_namespaces.7.html'
 
-  docker.containers.running?.ids.each do |id|
-    describe docker.object(id) do
-      its(%w(HostConfig IpcMode)) { should_not eq 'host' }
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      describe docker.object(id) do
+        its(%w{HostConfig IpcMode}) { should_not eq 'host' }
+      end
     end
   end
 end

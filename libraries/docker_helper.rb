@@ -54,7 +54,7 @@ class DockerHelper < Inspec.resource(1)
     SimpleConfig.new(
       stdout,
       assignment_regex: /^\s*([^=]*?)\s*=\s*(.*?)\s*$/,
-      multiple_values: false
+      multiple_values: false,
     ).params
   end
 end

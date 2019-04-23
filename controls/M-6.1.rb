@@ -1,7 +1,7 @@
-control "M-6.1" do
-  title "6.1 Ensure image sprawl is avoided (Not Scored)"
+control 'M-6.1' do
+  title '6.1 Ensure image sprawl is avoided (Not Scored)'
   desc  "Do not keep a large number of container images on the same host. Use only
-  tagged images as appropriate. Tagged images are useful to fall back from \"latest\" to a specific 
+  tagged images as appropriate. Tagged images are useful to fall back from \"latest\" to a specific
   version of an image in production. Images with unused or old tags may contain vulnerabilities that
   might be exploited, if instantiated. Additionally, if you fail to remove unused
   images from the system and there are various such redundant and unused images, the host filesystem
@@ -15,11 +15,11 @@ control "M-6.1" do
   https://docs.docker.com/engine/reference/commandline/rmi/5.
   https://docs.docker.com/engine/reference/commandline/pull/6.
   https://github.com/docker/docker/pull/11109"
-  tag "severity": "medium"
-  tag "cis_id": "6.1"
-  tag "cis_control": ["18", "6.1"]
-  tag "cis_level": "Level 1 - Linux Host OS"
-  tag "nist": ["SI-1", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '6.1'
+  tag "cis_control": ['18', '6.1']
+  tag "cis_level": 'Level 1 - Linux Host OS'
+  tag "nist": ['SI-1', '4']
   tag "check_text": "Step 1 Make a list of all image IDs that are currently
   instantiated by executing below command: docker images --quiet | xargs docker
   inspect --format '{{ .Id }}: Image={{.Config.Image }}' Step 2: List all the

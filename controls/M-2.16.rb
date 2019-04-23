@@ -1,5 +1,5 @@
-control "M-2.16" do
-  title "2.16 Ensure daemon-wide custom seccomp profile is applied, if needed (Not Scored)"
+control 'M-2.16' do
+  title '2.16 Ensure daemon-wide custom seccomp profile is applied, if needed (Not Scored)'
   desc  "You can choose to apply your custom seccomp profile at the daemon-wide
   level if needed and override Docker's default seccomp profile.
   A large number of system calls are exposed to every userland process with
@@ -14,11 +14,11 @@ control "M-2.16" do
   impact 0.5
   tag "ref": "1. https://docs.docker.com/engine/security/seccomp/\n2.
   https://github.com/docker/docker/pull/26276\n"
-  tag "severity": "medium"
-  tag "cis_id": "2.16"
-  tag "cis_control": ["18", "6.1"]
-  tag "cis_level": "Level 2 - Docker"
-  tag "nist": ["SI-1", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '2.16'
+  tag "cis_control": ['18', '6.1']
+  tag "cis_level": 'Level 2 - Docker'
+  tag "nist": ['SI-1', '4']
   tag "check_text": "Run the below command and review the seccomp profile listed in
   the Security Options section. If it is default, that means, Docker's default
   seccomp profile is applied. docker info --format '{{ .SecurityOptions }}'"
@@ -27,11 +27,11 @@ control "M-2.16" do
   choose to apply your own seccomp profile, use the --seccomp-profile flag at
   daemon start or put it in the daemon runtime parameters file.dockerd
   --seccomp-profile </path/to/seccomp/profile>"
-  tag "Default Value": "By default, Docker applies a seccomp profile."
+  tag "Default Value": 'By default, Docker applies a seccomp profile.'
   seccomp_profile = command("docker info --format '{{ .SecurityOptions }}'").stdout.strip
   describe 'The docker seccommp profile applied' do
-    subject{seccomp_profile}
-    it {should_not include 'name=seccomp,profile=default'}
+    subject { seccomp_profile }
+    it { should_not include 'name=seccomp,profile=default' }
   end
 
 end

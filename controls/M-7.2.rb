@@ -1,17 +1,5 @@
-SWARM_MODE = attribute(
-  'swarm_mode',
-  description: 'define the swarm mode, `active` or `inactive`',
-  default: 'inactive'
-)
-
-SWARM_MAX_MANAGER_NODES = attribute(
-  'swarm_max_manager_nodes',
-  description: 'number of manager nodes in a swarm',
-  default: 3
-)
-
-control "M-7.2" do
-  title "7.2 Ensure the minimum number of manager nodes have been created in a swarm (Scored)"
+control 'M-7.2' do
+  title '7.2 Ensure the minimum number of manager nodes have been created in a swarm (Scored)'
   desc  "Ensure that the minimum number of required manager nodes is created in a
   swarm. Manager nodes within a swarm have control over the swarm and change its
   configuration modifying security parameters. Having excessive manager nodes could render
@@ -23,28 +11,28 @@ control "M-7.2" do
   impact 0.5
   tag "ref": "1. https://docs.docker.com/engine/swarm/manage-nodes/2.
   https://docs.docker.com/engine/swarm/admin_guide/#/add-manager-nodes-forfault-tolerance"
-  tag "severity": "medium"
-  tag "cis_id": "7.2"
-  tag "cis_control": ["5", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["AC-6", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '7.2'
+  tag "cis_control": ['5', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['AC-6', '4']
   tag "check_text": "Run docker info and verify the number of managers. docker info
   --format '{{ .Swarm.Managers }}' Alternatively run the below command. docker
   node ls | grep 'Leader'"
   tag "fix": "If an excessive number of managers is configured, the excess can
   be demoted as workers using the following command: docker node demote
   <ID> Where ID the node ID value of the manager to be demoted."
-  tag "Default Value": "A single manager is all that is required to start a given cluster."
+  tag "Default Value": 'A single manager is all that is required to start a given cluster.'
   ref 'manage-nodes', url: 'https://docs.docker.com/engine/swarm/manage-nodes/'
   ref 'add-manager-nodes-forfault-tolerance', url: 'https://docs.docker.com/engine/swarm/admin_guide/#/add-manager-nodes-forfault-tolerance'
-  if SWARM_MODE == 'active' 
+  if attribute('swarm_mode') == 'active'
     describe docker.info do
-      its('Swarm.Managers') { should cmp <= SWARM_MAX_MANAGER_NODES }
+      its('Swarm.Managers') { should cmp <= attribute('swarm_max_manager_nodes') }
     end
-  else 
+  else
     impact 0.0
     describe 'The docker swarm mode is not being used, therefore this control is N/A' do
-      skip 'The docker swarm mode is not being used, therefore this control is N/A' 
+      skip 'The docker swarm mode is not being used, therefore this control is N/A'
     end
   end
 end

@@ -1,5 +1,5 @@
-control "M-5.18" do
-  title "5.18 Ensure the default ulimit is overwritten at runtime, only if needed (Not Scored)"
+control 'M-5.18' do
+  title '5.18 Ensure the default ulimit is overwritten at runtime, only if needed (Not Scored)'
   desc  "The default ulimit is set at the Docker daemon level. However, you may
   override the default ulimit setting, if needed, during container runtime.
   The ulimit provides control over the resources available to the shell and to
@@ -16,11 +16,11 @@ control "M-5.18" do
   tag "ref": "1.
   https://docs.docker.com/engine/reference/commandline/run/#set-ulimits-incontainer-ulimit2.
   http://www.oreilly.com/webops-perf/free/files/docker-security.pdf"
-  tag "severity": "medium"
-  tag "cis_id": "5.18"
-  tag "cis_control": ["18", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["SI-1", "4"]
+  tag "severity": 'medium'
+  tag "cis_id": '5.18'
+  tag "cis_control": ['18', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['SI-1', '4']
   tag "check_text": "docker ps --quiet --all | xargs docker inspect --format '{{ .Id
   }}:Ulimits={{ .HostConfig.Ulimits }}' The above command should return
   Ulimits=<no value> for each container instance until and unless there is an
@@ -33,9 +33,18 @@ control "M-5.18" do
   set at the Docker daemon level."
   ref url: 'https://docs.docker.com/engine/reference/commandline/cli/#setting-ulimits-in-a-container'
 
-  docker.containers.running?.ids.each do |id|
-    describe docker.object(id) do
-      its(%w(HostConfig Ulimits)) { should eq nil }
+  if docker.containers.running?.ids.empty?
+    impact 0.0
+    describe 'There are no running docker containers, therfore this control is N/A' do
+      skip 'There are no running docker containers, therfore this control is N/A'
+    end
+  end
+
+  if !docker.containers.running?.ids.empty?
+    docker.containers.running?.ids.each do |id|
+      describe docker.object(id) do
+        its(%w{HostConfig Ulimits}) { should eq nil }
+      end
     end
   end
 end

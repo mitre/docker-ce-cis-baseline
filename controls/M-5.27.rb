@@ -1,5 +1,5 @@
-control "M-5.27" do
-  title "5.27 Ensure docker commands always get the latest version of the image (Not Scored)"
+control 'M-5.27' do
+  title '5.27 Ensure docker commands always get the latest version of the image (Not Scored)'
   desc  "Always ensure that you are using the latest version of the image within
   your repository and not the cached older versions.
   Multiple docker commands such as docker pull, docker run, etc. are known to
@@ -8,12 +8,12 @@ control "M-5.27" do
   repository. This could lead to using older and vulnerable images.
   "
   impact 0.5
-  tag "ref": "1. https://github.com/docker/docker/pull/16609"
-  tag "severity": "medium"
-  tag "cis_id": "5.27"
-  tag "cis_control": ["18.1", "6.1"]
-  tag "cis_level": "Level 1 - Docker"
-  tag "nist": ["SI-2", "4"]
+  tag "ref": '1. https://github.com/docker/docker/pull/16609'
+  tag "severity": 'medium'
+  tag "cis_id": '5.27'
+  tag "cis_control": ['18.1', '6.1']
+  tag "cis_level": 'Level 1 - Docker'
+  tag "nist": ['SI-2', '4']
   tag "check_text": "Step 1: Open your image repository and list the image version
   history for the image you are inspecting. Step 2: Observe the status when the
   docker pull command is triggered. If the status is shown as Image is up to

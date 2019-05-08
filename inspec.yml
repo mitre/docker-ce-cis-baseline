@@ -97,6 +97,12 @@ attributes:
     description: 'port of the swarm node'
     type: numeric
     default: 2377
+    
+  - name: container_capadd
+    description: 'Docker container cap add'
+    type: numeric
+    default: 10
+  
 
 
 

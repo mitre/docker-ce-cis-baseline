@@ -40,7 +40,7 @@ control 'M-5.11' do
   cpu.shares. This will always give you the CPU share value based on the system.
   So, even if there is no CPU shares configured using -c or --cpu-shares
   argument in the docker run command, this file will have a value of 1024. If
-  we set one container\’s CPU shares to 512 it will receive half of the CPU time
+  we set one containers CPU shares to 512 it will receive half of the CPU time
   compared to the other container. So, take 1024 as 100% and then do quick math
   to derive the number that you should set for respective CPU shares. For
   example, use 512 if you want to set 50% and 256 if you want to set 25%."

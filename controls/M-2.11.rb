@@ -2,9 +2,9 @@ control 'M-2.11' do
   title '2.11 Ensure that authorization for Docker client commands is enabled(Scored)'
   desc  "Use native Docker authorization plugins or a third party authorization
   mechanism with Docker daemon to manage access to Docker client commands.
-  Docker\’s out-of-the-box authorization model is all or nothing. Any user
+  Dockers out-of-the-box authorization model is all or nothing. Any user
   with permission to access the Docker daemon can run any Docker client command. The same is
-  true for callers using Docker\’s remote API to contact the daemon. If you require greater
+  true for callers using Dockers remote API to contact the daemon. If you require greater
   access control, you can create authorization plugins and add them to your Docker daemon
   configuration. Using an authorization plugin, a Docker administrator can configure granular
   access policies for managing access to Docker daemon.

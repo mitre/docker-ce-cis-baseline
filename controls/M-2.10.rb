@@ -5,7 +5,7 @@ control 'M-2.10' do
   The base device size can be increased at daemon restart. Increasing the
   base device size allows all future images and containers to be of the new base device size.
   A user can use this option to expand the base device size however shrinking is not
-  permitted. This value affects the system-wide “base” empty filesystem that may already be
+  permitted. This value affects the system-wide base empty filesystem that may already be
   initialized and inherited by pulled images.
   Though the file system does not allot the increased size if it is empty, it
   will use more space for the empty case depending upon the device size. This may cause a denial

@@ -5,7 +5,7 @@ control 'M-5.10' do
   can control the amount of memory that a container may consume.
   By default, the container can use all of the memory on the host. You can use the
   memory limit mechanism to prevent a denial of service arising from one container
-  consuming all of the host’s resources such that other containers on the same host cannot perform
+  consuming all of the host\’s resources such that other containers on the same host cannot perform
   their intended functions. Having no limit on memory can lead to issues where one container
   can easily make the whole system unstable and as a result unusable.
   "

@@ -24,7 +24,9 @@ control 'M-5.29' do
   tag "Default Value": "By default, docker runs containers on its docker0
   bridge."
 
-  describe 'docker-test' do
-    skip 'Not implemented yet'
+  describe docker.containers do
+    its('networks') { should_not include 'bridge' }
   end
 end
+
+

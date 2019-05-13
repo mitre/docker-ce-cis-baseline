@@ -32,7 +32,7 @@ control 'M-4.9' do
 
   if !docker.images.ids.empty?
     docker.images.ids.each do |id|
-      describe command("docker history #{id}| grep 'ADD'") do
+      describe command("docker history #{id}| grep -i 'add'") do
         its('stdout') { should eq '' }
       end
     end

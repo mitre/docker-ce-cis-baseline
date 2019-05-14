@@ -30,3 +30,4 @@ control 'M-4.11' do
     skip 'A manual review is required to ensure verified packages are only installed'
   end
 end
+

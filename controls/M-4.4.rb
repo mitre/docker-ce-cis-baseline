@@ -43,3 +43,4 @@ control 'M-4.4' do
     skip 'A manual review is required to ensure images are scanned and rebuilt to include security patches'
   end
 end
+

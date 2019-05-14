@@ -30,3 +30,4 @@ control 'M-2.4' do
     its(['insecure-registries']) { should be_empty }
   end
 end
+

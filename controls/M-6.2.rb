@@ -41,3 +41,4 @@ control 'M-6.2' do
     it { should be <= attribute('managable_container_number') }
   end
 end
+

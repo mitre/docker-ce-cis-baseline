@@ -36,3 +36,4 @@ control 'M-3.20' do
     it { should_not be_executable.by('other') }
   end
 end
+

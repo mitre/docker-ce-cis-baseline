@@ -33,3 +33,4 @@ control 'M-3.6' do
     it { should be_executable.by('other') }
   end
 end
+

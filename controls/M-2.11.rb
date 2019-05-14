@@ -35,3 +35,4 @@ control 'M-2.11' do
     its(['authorization-plugins']) { should eq attribute('authorization_plugin') }
   end
 end
+

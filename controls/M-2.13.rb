@@ -31,3 +31,4 @@ control 'M-2.13' do
     its(['disable-legacy-registry']) { should eq(true) }
   end
 end
+

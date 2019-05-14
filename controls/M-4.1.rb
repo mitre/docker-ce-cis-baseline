@@ -39,3 +39,4 @@ control 'M-4.1' do
     skip 'A manual review is required to ensure a user for the container has been created'
   end
 end
+

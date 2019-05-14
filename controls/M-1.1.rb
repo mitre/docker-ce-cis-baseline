@@ -34,3 +34,4 @@ control 'M-1.1' do
     it { should be_mounted }
   end
 end
+

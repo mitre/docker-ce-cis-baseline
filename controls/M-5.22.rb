@@ -24,3 +24,4 @@ control 'M-5.22' do
     it { should be_empty }
   end
 end
+

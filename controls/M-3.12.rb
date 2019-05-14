@@ -33,3 +33,4 @@ control 'M-3.12' do
     it { should_not be_writable }
   end
 end
+

@@ -30,3 +30,4 @@ control 'M-4.5' do
     its('content') { should eq '1' }
   end
 end
+

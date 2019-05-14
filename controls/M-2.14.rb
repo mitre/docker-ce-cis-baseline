@@ -28,3 +28,4 @@ control 'M-2.14' do
     its(['live-restore']) { should eq(true) }
   end
 end
+

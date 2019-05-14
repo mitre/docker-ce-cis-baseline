@@ -34,3 +34,4 @@ control 'M-1.3' do
     its('Server.Version') { should cmp >= '17.03' }
   end
 end
+

@@ -41,3 +41,4 @@ control 'M-1.2' do
     skip 'A manual review is required to ensure the container host has been hardened'
   end
 end
+

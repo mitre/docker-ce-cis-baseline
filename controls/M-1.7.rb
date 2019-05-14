@@ -28,3 +28,4 @@ control 'M-1.7' do
     its('lines') { should include '-w /etc/docker/ -p rwxa -k docker' }
   end
 end
+

@@ -32,3 +32,4 @@ control 'M-1.11' do
     its('lines') { should include '-w /etc/docker/daemon.json -p rwxa -k docker' }
   end
 end
+

@@ -32,3 +32,4 @@ control 'M-2.15' do
     it { should include 'userland-proxy=false' }
   end
 end
+

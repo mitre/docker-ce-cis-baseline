@@ -28,3 +28,4 @@ control 'M-4.10' do
     skip 'Manually verify that you have not used secrets in images'
   end
 end
+

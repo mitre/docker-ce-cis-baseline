@@ -59,3 +59,4 @@ control 'M-6.1' do
     it { should be_empty }
   end
 end
+

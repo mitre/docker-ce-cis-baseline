@@ -32,3 +32,4 @@ control 'M-2.5' do
     its(['storage-driver']) { should_not eq('aufs') }
   end
 end
+

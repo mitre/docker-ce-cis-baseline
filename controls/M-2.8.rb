@@ -50,3 +50,4 @@ control 'M-2.8' do
     it { should be_file }
   end
 end
+

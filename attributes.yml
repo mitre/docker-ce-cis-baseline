@@ -10,3 +10,4 @@ log_driver: syslog
 log_opts: /syslog-address/
 app_armor_profile: docker-default
 selinux_profile: /label\:level\:s0-s0\:c1023/
+

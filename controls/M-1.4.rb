@@ -36,3 +36,4 @@ control 'M-1.4' do
     its('users') { should include attribute('trusted_user') }
   end
 end
+

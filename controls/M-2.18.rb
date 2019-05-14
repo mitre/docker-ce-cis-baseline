@@ -24,3 +24,4 @@ control 'M-2.18' do
     skip 'A manaul review is required to ensure containers are restricted from acquiring new privileges'
   end
 end
+

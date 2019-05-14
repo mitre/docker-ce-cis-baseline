@@ -30,3 +30,4 @@ control 'M-3.19' do
     it { should be_grouped_into 'root' }
   end
 end
+

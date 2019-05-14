@@ -34,3 +34,4 @@ control 'M-3.13' do
     it { should be_grouped_into 'root' }
   end
 end
+

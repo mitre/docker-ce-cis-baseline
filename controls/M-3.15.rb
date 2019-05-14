@@ -41,3 +41,4 @@ control 'M-3.15' do
     it { should be_grouped_into 'docker' }
   end
 end
+

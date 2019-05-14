@@ -39,3 +39,4 @@ control 'M-2.1' do
     its(['icc']) { should eq(false) }
   end
 end
+

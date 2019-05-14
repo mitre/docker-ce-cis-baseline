@@ -37,3 +37,4 @@ control 'M-4.3' do
     skip 'A manual review is required to ensure unnecessary packages are not installed in the container'
   end
 end
+

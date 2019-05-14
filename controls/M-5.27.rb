@@ -33,3 +33,4 @@ control 'M-5.27' do
     skip 'A manual review is required to ensure docker commands always get the latest version of the image'
   end
 end
+

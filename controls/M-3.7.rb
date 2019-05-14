@@ -45,3 +45,4 @@ control 'M-3.7' do
     it { should be_grouped_into 'root' }
   end
 end
+

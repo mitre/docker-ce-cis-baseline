@@ -30,11 +30,12 @@ control 'M-4.9' do
     end
   end
 
-  if !docker.images.ids.empty?
-    docker.images.ids.each do |id|
-      describe command("docker history #{id}| grep -i 'add'") do
+  if !docker.images.repositories.empty?
+    docker.images.repositories.each do |repo|
+      describe command(`docker history #{repo}| grep ADD`) do
         its('stdout') { should eq '' }
       end
     end
   end
 end
+

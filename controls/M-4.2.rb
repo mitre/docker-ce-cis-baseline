@@ -44,3 +44,4 @@ control 'M-4.2' do
     skip 'A manual review is required to ensure hat containers use trusted base images'
   end
 end
+

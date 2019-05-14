@@ -27,3 +27,4 @@ control 'M-1.6' do
     its('lines') { should include '-w /var/lib/docker/ -p rwxa -k docker' }
   end
 end
+

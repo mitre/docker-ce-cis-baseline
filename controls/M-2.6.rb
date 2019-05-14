@@ -34,3 +34,4 @@ control 'M-2.6' do
     its(['tlskey']) { should eq attribute('daemon_tlskey') }
   end
 end
+

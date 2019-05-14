@@ -30,3 +30,4 @@ control 'M-2.3' do
     its(['iptables']) { should eq(true) }
   end
 end
+

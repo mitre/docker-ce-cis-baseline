@@ -27,3 +27,4 @@ control 'M-2.17' do
     it { should_not cmp 'false' }
   end
 end
+

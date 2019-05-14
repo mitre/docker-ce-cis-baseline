@@ -28,3 +28,4 @@ control 'M-2.10' do
     its(['storage-opts']) { should eq(['dm.basesize=10G']) }
   end
 end
+

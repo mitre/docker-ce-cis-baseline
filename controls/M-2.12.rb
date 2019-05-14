@@ -29,3 +29,4 @@ control 'M-2.12' do
     its(['log-opts']) { should include attribute('log_opts') }
   end
 end
+

@@ -22,3 +22,4 @@ control 'M-2.2' do
     its(['log-level']) { should eq('info') }
   end
 end
+

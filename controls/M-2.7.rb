@@ -30,3 +30,4 @@ control 'M-2.7' do
     its(['default-ulimits', 'nofile']) { should eq('100:200') }
   end
 end
+

@@ -33,3 +33,4 @@ control 'M-1.12' do
     its('lines') { should include '-w /usr/bin/docker-containerd -p rwxa -k docker' }
   end
 end
+

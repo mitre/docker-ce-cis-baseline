@@ -33,3 +33,4 @@ control 'M-4.8' do
     skip 'Use DevSec Linux Baseline in Container'
   end
 end
+

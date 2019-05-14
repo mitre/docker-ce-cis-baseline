@@ -30,3 +30,4 @@ control 'M-1.5' do
     it { should be_running }
   end
 end
+

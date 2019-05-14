@@ -31,3 +31,4 @@ control 'M-2.9' do
     its(['cgroup-parent']) { should eq('docker') }
   end
 end
+

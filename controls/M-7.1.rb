@@ -21,7 +21,7 @@ control 'M-7.1' do
   tag "fix": 'If swarm mode has been enabled on a system in error, run docker swarm leave'
   tag "Default Value": 'By default, docker swarm mode is not enabled.'
   ref 'docker swarm init', url: 'https://docs.docker.com/engine/reference/commandline/swarm_init/'
-  if SWARM_MODE == 'active'
+  if attribute('swarm_mode') == 'active'
     describe docker.info do
       its('Swarm.LocalNodeState') { should eq attribute('swarm_mode') }
     end
@@ -32,3 +32,4 @@ control 'M-7.1' do
     end
   end
 end
+

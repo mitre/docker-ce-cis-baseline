@@ -26,11 +26,18 @@ control 'M-5.26' do
   if !docker.containers.running?.ids.empty?
     docker.containers.running?.ids.each do |id|
       get_health = command("docker inspect --format='{{json .State.Health.Status}}' #{id}").stdout.strip.split('"')
-      get_health.each do |health_status|
-        health_status.chomp('"\\"')
-        describe "The docker container health check for container #{id}" do
-          subject { health_status }
-          it { should cmp 'healthy' }
+
+      describe "The docker container health check status" do
+        subject {get_health}
+        it { should_not be_empty }
+      end
+      if !get_health.empty?
+        get_health.each do |health_status|
+          health_status.chomp('"\\"')
+          describe "The docker container health check for container #{id}" do
+            subject { health_status }
+            it { should cmp 'healthy' }
+          end
         end
       end
     end
@@ -42,4 +49,6 @@ control 'M-5.26' do
     end
   end
 end
+
+
 

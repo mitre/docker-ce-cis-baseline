@@ -34,7 +34,8 @@ control 'M-5.26' do
         end
       end
     end
-  else
+  end
+  if docker.containers.running?.ids.empty?
     impact 0.0
     describe 'There are no docker containers running, therefore this control is N/A' do
       skip 'There are no docker containers running, therefore this control is N/A'

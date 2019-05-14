@@ -40,7 +40,7 @@ control 'M-3.4' do
     describe file('docker_socket_file') do
       it { should exist }
       it { should be_file }
-      its('mode') { should cmp <= '0644' }
+      its('mode') { should cmp <= 0644 }
     end
 
   else

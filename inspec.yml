@@ -104,8 +104,3 @@ inputs:
     description: 'Docker container cap add'
     type: numeric
     value: 10
-  
-
-
-
-
